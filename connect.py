@@ -245,3 +245,55 @@ class socket_conn(object):
         recv_flag, recv_data = self.recv()
         if recv_flag == self.data_flag:
             print(recv_data)
+            
+# the next used the json and pickle to trans float data
+import json
+
+class socket_trans(object):
+    def __init__(self, conn_type=0, host='127.0.0.1', port_num=8086, bufsize=1024):
+        self.host = host
+        self.port_num = port_num
+        self.BUFSIZE = bufsize
+
+        self.connect_flag =         [110]
+        self.connect_success_flag = [111]
+        self.data_flag =            [112]
+        self.episode_start_flag =   [113]
+        self.episode_end_flag =     [114]
+        self.train_end_flag =       [115]
+
+        if conn_type == 0:
+            self.conn = self.create_connect_server()
+        else:
+            self.conn = self.create_connect_client()
+
+    def create_connect_server(self):
+        address = ('', self.port_num)
+        tcpSrvSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        tcpSrvSock.bind(address)
+        tcpSrvSock.listen(5)
+        conn, addr = tcpSrvSock.accept()
+        print(conn, addr)
+        return conn
+
+    def create_connect_client(self):
+        addr = (self.host, self.port_num)
+        conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        conn.connect(addr)
+        return conn
+
+    def send(self, data):
+        json_string = json.dumps(data)
+        nameBytes = json_string.encode('utf-8')
+        self.conn.send(nameBytes)
+        # self.conn.send(json_string)
+
+    def recv(self):
+        json_string = self.conn.recv(self.BUFSIZE)
+        nameStr = json_string.decode('utf-8')
+        data = json.loads(nameStr)
+        # data = json.loads(json_string)
+        return data
+
+    def connect_close(self):
+        self.conn.close()
