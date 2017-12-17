@@ -246,7 +246,7 @@ class socket_conn(object):
         if recv_flag == self.data_flag:
             print(recv_data)
             
-# the next used the json and pickle to trans float data
+# the next code used the json and pickle to trans float data
 import json
 
 class socket_trans(object):
