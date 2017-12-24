@@ -321,7 +321,9 @@ class multi_connection(object):
 
         if conn_type == 'server':
             self.conn = self.create_connect_server()
-            self.recv_flag(self.connect_flag)
+            recv_data = self.conn.recv()
+            if self.recv_flag(self.connect_flag, recv_data):
+                print('server connect with the client success')
         elif conn_type == 'client':
             self.conn = self.create_connect_client()
             self.send_flag(self.connect_flag)
@@ -337,13 +339,14 @@ class multi_connection(object):
         conn = Client(address, authkey=b'secret password A')
         return conn
 
-    def recv_flag(self, input_flag):
-        recv_flag = self.conn.recv()
-        if input_flag[0] == recv_flag[0]:
-            print("recv flag success")
-            # time.sleep(0.1)
+    def recv_flag(self, input_flag, recv_data):
+        if input_flag[0] == recv_data[0]:
+            if input_flag[0] == self.train_end_flag[0]:
+                print('recv train end flag, the conn will close too')
+            return 1
         else:
-            print("recv flag wrong!")
+            # print("recv flag wrong!")
+            return 0
 
     def send_flag(self, input_flag):
         self.conn.send(input_flag)
@@ -353,3 +356,6 @@ class multi_connection(object):
 
     def send(self, data_list):
         self.conn.send(data_list)
+
+    def close(self):
+        self.conn.close()
