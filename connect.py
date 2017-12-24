@@ -307,7 +307,7 @@ from multiprocessing.connection import Client
 # you should revise the pickle protocol in the multiprocessing connection.py
 
 class multi_connection(object):
-    def __init__(self, conn_type=0, host='127.0.0.1', port_num=8086, bufsize=1024):
+    def __init__(self, conn_type='server', host='127.0.0.1', port_num=8086, bufsize=1024):
         self.host = host
         self.port_num = port_num
         self.BUFSIZE = bufsize
@@ -319,10 +319,10 @@ class multi_connection(object):
         self.episode_end_flag =     [114]
         self.train_end_flag =       [115]
 
-        if conn_type == 0:
+        if conn_type == 'server':
             self.conn = self.create_connect_server()
             self.recv_flag(self.connect_flag)
-        else:
+        elif conn_type == 'client':
             self.conn = self.create_connect_client()
             self.send_flag(self.connect_flag)
 
