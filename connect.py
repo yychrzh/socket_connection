@@ -297,3 +297,59 @@ class socket_trans(object):
 
     def connect_close(self):
         self.conn.close()
+
+
+from multiprocessing.connection import Listener
+from multiprocessing.connection import Client
+
+# connection with multiprocessing.connection
+# in order to trans between python2. and python3. ,
+# you should revise the pickle protocol in the multiprocessing connection.py
+
+class multi_connection(object):
+    def __init__(self, conn_type=0, host='127.0.0.1', port_num=8086, bufsize=1024):
+        self.host = host
+        self.port_num = port_num
+        self.BUFSIZE = bufsize
+
+        self.connect_flag =         [110]
+        self.connect_success_flag = [111]
+        self.data_flag =            [112]
+        self.episode_start_flag =   [113]
+        self.episode_end_flag =     [114]
+        self.train_end_flag =       [115]
+
+        if conn_type == 0:
+            self.conn = self.create_connect_server()
+            self.recv_flag(self.connect_flag)
+        else:
+            self.conn = self.create_connect_client()
+            self.send_flag(self.connect_flag)
+
+    def create_connect_server(self):
+        address = ('localhost', self.port_num)
+        listener = Listener(address, authkey=b'secret password A')
+        conn = listener.accept()
+        return conn
+
+    def create_connect_client(self):
+        address = (self.host, self.port_num)
+        conn = Client(address, authkey=b'secret password A')
+        return conn
+
+    def recv_flag(self, input_flag):
+        recv_flag = self.conn.recv()
+        if input_flag[0] == recv_flag[0]:
+            print("recv flag success")
+            # time.sleep(0.1)
+        else:
+            print("recv flag wrong!")
+
+    def send_flag(self, input_flag):
+        self.conn.send(input_flag)
+
+    def recv(self):
+        self.conn.recv()
+
+    def send(self, data_list):
+        self.conn.send(data_list)
