@@ -352,7 +352,8 @@ class multi_connection(object):
         self.conn.send(input_flag)
 
     def recv(self):
-        self.conn.recv()
+        recv_data = self.conn.recv()
+        return recv_data
 
     def send(self, data_list):
         self.conn.send(data_list)
