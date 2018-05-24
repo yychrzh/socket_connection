@@ -371,7 +371,7 @@ SOCKET create_conn_server()
 
 	int len = sizeof(SOCKADDR);
 
-	printf("\conn accept");
+	printf("\nconn accept");
 	//accept
 	conn = accept(sockServer, (SOCKADDR*)&addr, &len);
 
