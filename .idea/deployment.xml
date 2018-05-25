@@ -5,7 +5,7 @@
       <paths name="server1">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/PyCharm/socket_connection" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

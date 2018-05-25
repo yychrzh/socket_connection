@@ -3,7 +3,55 @@ import os
 import time
 import math
 
+
 HOST = '127.0.0.1'
+
+
+# tcp socket, send and receive strings
+
+
+class tcpsocket(object):
+    def __init__(self, conn_type='server', host='127.0.0.1', port_num=8088, buffsize=200, debug_print=True):
+        self.host = host
+        self.port_num = port_num
+        self.BUFFSIZE = buffsize
+        self.debug_print = debug_print
+        if conn_type == 'server':
+            self.conn = self.create_connect_server()
+        else:
+            self.conn = self.create_connect_client()
+
+    # print debug strings if needed
+    def d_print(self, info):
+        if self.debug_print:
+            print("(debug): ", info)
+
+    # create the socket server connection
+    def create_connect_server(self):
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.bind(('', self.port_num))
+        server.listen(0)
+        conn, address = server.accept()
+        self.d_print([conn, address])
+        return conn
+
+    # create the socket client connection
+    def create_connect_client(self):
+        addr = (self.host, self.port_num)
+        conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        conn.connect(addr)
+        self.d_print("connect with address " + self.host + " success in port: %d" % self.port_num)
+        return conn
+
+    # send data with the format of strings
+    def send_strings(self, send_str):
+        self.conn.send(bytes("%s" % send_str, encoding="ascii"))
+
+    # receive data with the format of strings, no bigger than self.BUFFSIZE bytes
+    def recv_strings(self):
+        recv_str = self.conn.recv(self.BUFFSIZE)
+        return recv_str
+
 
 class socket_conn(object):
     def __init__(self, conn_type=0, host='127.0.0.1', port_num=8088, bufsize=200):
@@ -154,7 +202,7 @@ class socket_conn(object):
 
     # input: data range: float [-1, 1] vector
     def send_data(self, input):
-        data = self.float_data_trans(input)   #data lens : len(input) * self.data_width
+        data = self.float_data_trans(input)   # data lens : len(input) * self.data_width
         send_str = self.send_str_gen(data)
         self.conn.send(bytes("%s" % send_str, encoding="ascii"))
 
@@ -245,9 +293,11 @@ class socket_conn(object):
         recv_flag, recv_data = self.recv()
         if recv_flag == self.data_flag:
             print(recv_data)
-            
-# the next code used the json and pickle to trans float data
+
+
+# the under code used the json and pickle to trans float data
 import json
+
 
 class socket_trans(object):
     def __init__(self, conn_type=0, host='127.0.0.1', port_num=8086, bufsize=1024):
@@ -302,9 +352,11 @@ class socket_trans(object):
 from multiprocessing.connection import Listener
 from multiprocessing.connection import Client
 
+
 # connection with multiprocessing.connection
 # in order to trans between python2. and python3. ,
 # you should revise the pickle protocol in the multiprocessing connection.py
+
 
 class multi_connection(object):
     def __init__(self, conn_type='server', host='127.0.0.1', port_num=8086, bufsize=1024):

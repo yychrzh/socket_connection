@@ -21,6 +21,7 @@ typedef unsigned char BYTE;
 #define SERVER_IP             "127.0.0.1"
 #define DEBUG_PRINT           1
 
+void debug_print(char *info);
 int create_conn_server();
 int create_conn_client();
 int test_server(int conn);
