@@ -12,15 +12,15 @@ class tcpsocket(object):
         self.host = host
         self.port_num = port_num
         self.BUFFSIZE = buffsize
-        self.debug_print = debug_print
+        self.debug_print_flag = debug_print
         if conn_type == 'server':
             self.conn = self.create_connect_server()
         else:
             self.conn = self.create_connect_client()
 
     # print debug strings if needed
-    def d_print(self, info):
-        if self.debug_print:
+    def debug_print(self, info):
+        if self.debug_print_flag:
             print("(debug)", info)
 
     # create the socket server connection
@@ -29,7 +29,7 @@ class tcpsocket(object):
         server.bind(('', self.port_num))
         server.listen(0)
         conn, address = server.accept()
-        self.d_print([conn, address])
+        self.debug_print([conn, address])
         return conn
 
     # create the socket client connection
@@ -37,7 +37,7 @@ class tcpsocket(object):
         addr = (self.host, self.port_num)
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         conn.connect(addr)
-        self.d_print("connect with address " + self.host + " success in port: %d" % self.port_num)
+        self.debug_print("connect with address " + self.host + " success in port: %d" % self.port_num)
         return conn
 
     # send data with the format of strings

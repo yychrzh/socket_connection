@@ -11,31 +11,25 @@
 #include <arpa/inet.h>  
 #include <netinet/in.h>  
 
-#ifndef BYTE
-typedef unsigned char BYTE;
-#endif
+using namespace std;
 
-#define BACKLOG               5                   
-
-void debug_print(char *info);
-int create_conn_server();
-int create_conn_client();
-int test_server(int conn);
-int test_client(int conn);
+#define BACKLOG          5                
 
 
 // a class for socket communication
-class tcpsocket
+class Tcpsocket
 {
     public:
-        tcpsocket(string s_type='server', int port_n=8088, int buff_s=200, char *s_ip='127.0.0.1', bool debug=true);
-        void send(char *send_buf, int send_data_lens);
-        void recv(char *recv_buf);
-        void debug_print(string info);
+        Tcpsocket(const char *s_type, int port_n, int buff_s, const char *s_ip, bool debug);
+		Tcpsocket(const char *s_type, int port_n, int buff_s, bool debug);
+        void debug_print(const char *info);
+		int buffsize;
+		char socket_type[10];
+		void send_strings(const void *send_buf, int send_data_lens);
+        int recv_strings(void *recv_buf);
     private:
-	    string socket_type;
-	    int port;
-	    int buffsize;
+	    int port_num;
+		int conn;
 	    char server_ip[50];
 	    bool debug_print_flag;
 	    int create_conn_server();
