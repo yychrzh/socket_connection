@@ -39,7 +39,7 @@ Tcpsocket::Tcpsocket(const char *s_type, int port_n, int buff_s, bool debug)
 void Tcpsocket::debug_print(const char *info)
 {
     if (debug_print_flag){
-        printf("(debug)");
+		printf("(tcp %s)", socket_type);
         printf("%s", info);
     }
 	return;
@@ -87,7 +87,16 @@ int Tcpsocket::create_conn_server()
 		return -1;
 	}
 	else{
-        debug_print("server : connected\n");
+		char msg[200] = "\0";
+		char port_str[10];
+		// test: printf("h: %d; n: %d\n", htons(ntohs(9999)), ntohs(htons(9999)));
+		sprintf(port_str, "%d", ntohs(client_addr.sin_port));
+		strcpy(msg, "accept from client ");
+		strcat(msg, inet_ntoa(client_addr.sin_addr));
+		strcat(msg, ":");
+		strcat(msg, port_str);
+		strcat(msg, " success !\n");
+        debug_print(msg);
 		return conn;
 	}
 }
@@ -109,16 +118,23 @@ int Tcpsocket::create_conn_client()
 	memset(&server_addr, 0, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(port_num);
-	server_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
-	server_addr.sin_addr.s_addr = inet_addr(server_ip); // inet_addr(SERVER_IP);
+	server_addr.sin_addr.s_addr = inet_addr(server_ip); 
 
 	err = connect(conn, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
 	if (err == 0){
-        debug_print("client : connect to server success\n");
+		char msg[200] = "\0";
+		char port_str[10];
+		sprintf(port_str, "%d", port_num);
+		strcpy(msg, "connect to server ");
+		strcat(msg, server_ip);
+		strcat(msg, ":");
+		strcat(msg, port_str);
+		strcat(msg, " success !\n");
+        debug_print(msg);
         return conn;
 	}
 	else{
-        debug_print("client : connect error\n");
+        debug_print("client : connect error !\n");
 		return -1;
 	}
 }
@@ -126,12 +142,31 @@ int Tcpsocket::create_conn_client()
 // recv_buf: char pointer that stores the received strings
 int Tcpsocket::recv_strings(void *recv_buf)
 {
-	return recv(conn, recv_buf, buffsize, 0);
+	int recv_data_lens = 0;
+	recv_data_lens = recv(conn, recv_buf, buffsize, 0);
+	if (recv_data_lens <= 0){
+		debug_print("the connection might have broken !\n");
+	}
+	return recv_data_lens;
 }
 
 // send_buf: char pointer that stores the strings will be sent
 void Tcpsocket::send_strings(const void *send_buf, int send_data_lens)
 {
-	send(conn, send_buf, buffsize, 0);
+	int real_send_lens = 0;
+	real_send_lens = send(conn, send_buf, send_data_lens, 0);
+	if (real_send_lens < send_data_lens){
+		debug_print("not all data has been sent\n");
+	}
+	return;
+}
+
+void Tcpsocket::close_socket()
+{
+	if (0 == strcmp(socket_type, "client")){
+		printf("shutdown and close socket connection !\n");
+		shutdown(conn, 2);
+	    close(conn);
+	}
 	return;
 }

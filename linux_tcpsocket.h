@@ -27,6 +27,7 @@ class Tcpsocket
 		char socket_type[10];
 		void send_strings(const void *send_buf, int send_data_lens);
         int recv_strings(void *recv_buf);
+		void close_socket();
     private:
 	    int port_num;
 		int conn;
