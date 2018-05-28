@@ -6,6 +6,8 @@ void remove_new_line(char *str, int lens);
 
 int read_from_screen(char *recv_buf, int buffsize);
 
+void char_test();
+
 void server_test(Tcpsocket conn);
 
 void client_test(Tcpsocket conn);
@@ -43,6 +45,29 @@ int read_from_screen(char *recv_buf, int buffsize)
 	return read_data_lens;
 }
 
+// test in client mode:
+void char_test(Tcpsocket conn)
+{
+    char recv_buf[conn.buffsize];
+	int data_bytes_size = 0;
+    char data[5] = {-128, -64, 0, 64, 127};
+	
+	printf("send five typical char data to server: \n");
+	conn.send_strings(data, 5);
+
+	data_bytes_size = conn.recv_strings(recv_buf);
+	if (data_bytes_size <= 0){
+		printf("connection might have broken !\n");
+	}
+	printf("receive from client:\n");
+	for (int i = 0;i < 5;i++){
+		printf("%d ", recv_buf[i]);
+	}
+    printf("\n");
+
+	return;
+}
+	
 // test send and receive data with or from clent
 void server_test(Tcpsocket conn)
 {
@@ -140,7 +165,8 @@ int main(int argc, char *argv[])
 					strcpy(server_ip, "127.0.0.1");
 				}
 				Tcpsocket conn("client", port_num, buffsize, server_ip, true);
-				client_test(conn);
+				// client_test(conn);
+				char_test(conn);
 			}
 			else{
 				printf("inpput server ip wrong !\n");

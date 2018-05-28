@@ -1,8 +1,5 @@
 #-*-coding:utf-8-*-
 import socket
-import os
-import time
-import math
 
 
 # tcp socket, send and receive strings
@@ -58,11 +55,16 @@ class tcpsocket(object):
         recv_str = recv_str.decode("ascii")
         return recv_str
 
+    def send_bytes(self, send_bytes):
+        real_send_lens = self.conn.send(send_bytes)
+        if real_send_lens < len(send_bytes):
+            self.debug_print("not all data has been sent")
+
     def recv_bytes(self):
-        recv_str = self.conn.recv(self.BUFFSIZE)
-        if recv_str is b'':
+        recv_b = self.conn.recv(self.BUFFSIZE)
+        if recv_b is b'':
             self.debug_print("the connection might have broken !")
-        return recv_str
+        return recv_b
 
     def close_socket(self):
         if self.conn_type == 'client':

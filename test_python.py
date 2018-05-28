@@ -1,6 +1,7 @@
 #-*-coding:utf-8-*-
 from py_tcpsocket import tcpsocket
 import time
+from number_conversion import *
 
 
 def read_one_line_from_screen():
@@ -36,6 +37,20 @@ def client_test(conn):
             conn.close_socket()
 
 
+# test in server mode:
+def byte_test(conn):
+    recv_bytes = conn.recv_bytes()
+    print("recv_bytes: ", recv_bytes)
+    print("recv_lens: ", len(recv_bytes))
+    print("recv type: ", type(recv_bytes))
+    int_bytes = [int(v) for v in recv_bytes]
+    for i in range(len(int_bytes)):
+        int_bytes[i] = byte2char(int_bytes[i])
+    print("recv_int: ", int_bytes)
+    send_bytes = bytes([0, 64, 127, 192, 255, 128])
+    conn.send_bytes(send_bytes)
+
+
 if __name__ == "__main__":
     port_num = 8088
     socket_type = 'server'
@@ -51,7 +66,8 @@ if __name__ == "__main__":
     if socket_type == 'server':
         print("create socket server, waiting for client:")
         conn = tcpsocket(conn_type=socket_type, port_num=port_num, buffsize=200, debug_print=True)
-        server_test(conn)
+        # server_test(conn)
+        byte_test(conn)
     elif socket_type == 'client':
         print("create socket client, please input server ip(default: '127.0.0.1'):")
         recv_str = read_one_line_from_screen()
