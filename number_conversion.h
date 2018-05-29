@@ -13,8 +13,8 @@
 #define FLOAT32_EXPONENT          8
 #define FLOAT32_EXPONENT_OFFSET   127
 #define FLOAT32_FRACTION          23
-#define FLOAT32_BIN_BUF           FLOAT32_FRACTION + (int)(pow(2, FLOAT32_EXPONENT) - 1)  // 150
-#define FLOAT32_BYTE_BUF          (int)(FLOAT32_BIN_BUF / 8) + 1   // 19
+#define FLOAT32_BIN_BUF           150 //FLOAT32_FRACTION + (int)(pow(2, FLOAT32_EXPONENT) - 1)  // 150
+#define FLOAT32_BYTE_BUF          4 // 19  // (int)(FLOAT32_BIN_BUF / 8) + 1   // 19
 
 // double float: 64 bits, 8 bytes
 #define FLOAT64_BIT               64
@@ -22,8 +22,8 @@
 #define FLOAT64_EXPONENT          11
 #define FLOAT64_EXPONENT_OFFSET   1023
 #define FLOAT64_FRACTION          52
-#define FLOAT64_BIN_BUF           FLOAT64_FRACTION + (int)(pow(2, FLOAT64_EXPONENT) - 1)  // 1075
-#define FLOAT64_BYTE_BUF          (int)(FLOAT64_BIN_BUF / 8) + 1    // 135
+#define FLOAT64_BIN_BUF           1075 //FLOAT64_FRACTION + (int)(pow(2, FLOAT64_EXPONENT) - 1)  // 1075
+#define FLOAT64_BYTE_BUF          8 // 135  // (int)(FLOAT64_BIN_BUF / 8) + 1    // 135
 
 class Number_conver
 {
@@ -37,7 +37,6 @@ class Number_conver
 		void debug_print(const char *infostr, const long int *infolong, int data_lens);
 		void debug_print(const char *infostr, const float *infofloat, int data_lens);
 		void debug_print(const char *infostr, const double *infodouble, int data_lens);
-		
 		
 		/*******************************byte********************************/
 		// from byte to binary: unsigned char to char [8]
@@ -66,8 +65,8 @@ class Number_conver
 		void double2byte(double x, unsigned char *bys);
 		
 		// from bytes (unsigned char array) to float or double
-        float byte2float(const unsigned char *bins);
-		double byte2double(const unsigned char *bins);
+        float byte2float(const unsigned char *bys);
+		double byte2double(const unsigned char *bys);
 		
 		/*******************************bin********************************/
 		// from float or double (decimal) to binary (char array)
@@ -94,8 +93,13 @@ class Number_conver
         float bin2float(const char *bins);
 		double bin2double(const char *bins);
 		
-		// from char to unsigned char
+		/*******************************char********************************/
+		// from unsigned char to char: [0, 255] ~ [-128, 127]
+		char byte2char(unsigned char x);
+		
+		// from char to char: [-128, 127] ~ [0, 255]
         unsigned char char2byte(char x);
+		
 	private:
 	    bool debug_print_flag;
 };
