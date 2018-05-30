@@ -39,11 +39,6 @@ class Number_conver
 		void debug_print(const char *infostr, const double *infodouble, int data_lens);
 		
 		/*******************************byte********************************/
-		// from byte to binary: unsigned char to char [8]
-		void byte2bin(unsigned char x, char *bins);
-		// from binary to byte: char [8] to unsigned char
-        unsigned char bin2byte(const char *bins);
-		
 		// from float or double (decimal) to bytes (unsigned char array)
 		void dec2byte(float x, unsigned char *bys);   // bys[19]
 		void dec2byte(double x, unsigned char *bys);  // bys[135]
@@ -69,6 +64,16 @@ class Number_conver
 		double byte2double(const unsigned char *bys);
 		
 		/*******************************bin********************************/
+		// from byte to binary: unsigned char to char [8]
+		void byte2bin(unsigned char x, char *bins);
+		// from binary to byte: char [8] to unsigned char
+        unsigned char bin2byte(const char *bins);
+		
+		// from bytes to binary: unsigned char [] to char []: bit: lens of bytes:
+		void bys2bin(const unsigned char *bys, char *bins, int bit);
+		// from binary to bytes: char [] to unsigned char []: bit: lens of bytes:
+		void bin2bys(unsigned char *bys, const char *bins, int bit);
+		
 		// from float or double (decimal) to binary (char array)
         void dec2bin(float x, char *bins, int bit);    
 		void dec2bin(double x, char *bins, int bit);  
