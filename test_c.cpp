@@ -1,4 +1,5 @@
-#include "linux_tcpsocket.h"
+// #include "linux_tcpsocket.h"
+#include "linux_protocol.h"
 
 void time_delay(int time_flag);
 
@@ -11,6 +12,8 @@ void char_test();
 void server_test(Tcpsocket conn);
 
 void client_test(Tcpsocket conn);
+
+void test_tcp();
 
 
 void time_delay(int time_flag)  // delay 1000 * time_flag
@@ -124,7 +127,7 @@ void client_test(Tcpsocket conn)
 	}
 }
 
-int main(int argc, char *argv[])
+void test_tcp()
 {
 	char socket_type[10];
 	char socket_port_num[10];
@@ -182,5 +185,72 @@ int main(int argc, char *argv[])
 		printf("input socket_type wrong !\n");
 	}
 
-	return 0;
+	return;
+}
+
+int main(int argc, char *argv[])
+{
+	char socket_type[10];
+	char socket_port_num[10];
+	char server_ip[50];
+	int port_num = 8088;
+	int buffsize = 200;
+	int read_lens = 0;
+	
+	memset(socket_port_num, '\0', 10);
+	printf("please input socket port_num(default:8088, >2048):\n");
+	read_lens = read_from_screen(socket_port_num, 10); // read a line from screen
+	if (read_lens > 0)
+	{
+		if (socket_port_num[0] != '\0'){
+			int num = atoi(socket_port_num);  
+			if (num > 2048){
+				port_num = num;
+			}
+		}
+	}
+	
+	memset(socket_type, '\0', 10);
+	printf("please input socket type(server or client):\n");
+	read_lens = read_from_screen(socket_type, 10); // read a line from screen
+	
+	if (read_lens > 0){
+		if (0 == strcmp(socket_type, "server")){
+			printf("create socket server, waiting for client:\n");
+			// Tcpsocket conn("server", port_num, buffsize, true);
+			// server_test(conn);
+			Data_transfer conn("server", port_num, buffsize, true);
+		}
+		else if (0 == strcmp(socket_type, "client")){
+			printf("create socket client, please input server ip(default: '127.0.0.1'):\n");
+			memset(server_ip, '\0', 10);
+	        read_lens = read_from_screen(server_ip, 50); // read a line from screen
+			if (read_lens > 0){
+				if (server_ip[0] == '\0'){
+					strcpy(server_ip, "127.0.0.1");
+				}
+				// Tcpsocket conn("client", port_num, buffsize, server_ip, true);
+				// client_test(conn);
+				// char_test(conn);
+				Data_transfer conn("client", port_num, buffsize, server_ip, true);
+			}
+			else{
+				printf("inpput server ip wrong !\n");
+			}
+		}
+		else{
+			printf("company with server: %d\n", strcmp(socket_type, "server"));
+			printf("company with client: %d\n", strcmp(socket_type, "client"));
+			printf("%s\n", socket_type);
+		}
+	}
+	else{
+		printf("input socket_type wrong !\n");
+	}
+
+	while (1){
+		;
+	}
+	
+	return 0;	
 }

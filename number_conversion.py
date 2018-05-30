@@ -267,6 +267,26 @@ class Number_conver(object):
         float_data = self.bin2float(bins)
         return float_data
 
+    # data_lens: float data_lens:
+    def float_array2bys(self, float_array, bit=32):
+        if bit != 32 and bit != 64:
+            raise Exception("float bit choose error !")
+        bys = []
+        for i in range(len(float_array)):
+            temp_bys = self.float2byte(float_array[i], bit)
+            for j in range(len(temp_bys)):
+                bys.append(temp_bys[j])
+        return bys
+
+    def bys2float_array(self, bys, bit=32):
+        if bit != 32 and bit != 64:
+            raise Exception("float bit choose error !")
+        buf = 4 if bit == 32 else 8
+        float_array = []
+        for i in range(int(len(bys) / buf)):
+            float_array.append(self.byte2float(bys[(buf * i):(buf * i + buf)]))
+        return float_array
+
     """*********************************char**********************************"""
     # from [-128, 127] to [0, 255]
     def char2byte(self, input_data):
@@ -324,12 +344,21 @@ if __name__ == "__main__":
     print(bys64)
     print(f32)
     print(f64)
-    """
+    
     x1 = [-128, -64, 0, 64, 127]  # char
     x2 = [0, 64, 128, 192, 255]   # byte
     b1 = [n_c.char2byte(v) for v in x1]
     c1 = [n_c.byte2char(v) for v in b1]
     print(b1)
     print(c1)
+    """
+    a = [11.01, 2.025, 178.245]
 
+    bys32 = n_c.float_array2bys(a, 32)
+    bys64 = n_c.float_array2bys(a, 64)
 
+    d32 = n_c.bys2float_array(bys32, 32)
+    d64 = n_c.bys2float_array(bys64, 64)
+
+    print(d32)
+    print(d64)

@@ -41,5 +41,33 @@ def test_bytes():
         print(b[i])
 
 
+class A():
+    def __init__(self, info):
+        print("A", info)
+
+    def func1(self):
+        print("A.1")
+
+
+class B():
+    def __init__(self, info):
+        print("B", info)
+
+    def func2(self):
+        print("B.2")
+
+
+class C(A, B):
+    def __init__(self, info):
+        print(info)
+        A.__init__(self, info)
+        B.__init__(self, info)
+
+    def func3(self):
+        self.func1()
+        self.func2()
+
+
 if __name__ == "__main__":
-    test_bytes()
+    oc = C('fork')
+    oc.func3()

@@ -35,6 +35,8 @@
 #define EVEN_FLAG                0
 #define ODD_FLAG                 1
 
+#define BUFFSIZE                 2048
+
 
 // a class for send float data
 class Data_transfer: public Tcpsocket, public Number_conver 
@@ -43,16 +45,16 @@ class Data_transfer: public Tcpsocket, public Number_conver
 		Data_transfer(const char *s_type, int port_n, int buff_s, const char *s_ip, bool print_flag):Tcpsocket(s_type, port_n, buff_s, s_ip, print_flag), Number_conver(print_flag) {}
         Data_transfer(const char *s_type, int port_n, int buff_s, bool print_flag):Tcpsocket(s_type, port_n, buff_s, print_flag), Number_conver(print_flag) {}
        
+	    float recv_float_data[(int)((BUFFSIZE - FLAG_LENGTH) / FLOAT32_BYTE)];   // max float data length;
+		double recv_double_data[(int)((BUFFSIZE - FLAG_LENGTH) / FLOAT64_BYTE)]; // max double data length;
+	   
 	    /**********************************send recv**************************************/
 		// recv float or double data, parameters: recv data type and data length
-		int recv_data(unsigned char *data_type, int *data_lens);
+		void recv_data(unsigned char *data_type, int *data_lens);
 		// send float data
 		void send_data(float *data, unsigned int data_lens);
 		// send double data
 		void send_data(double *data, unsigned int data_lens);
-		
-		float recv_float_data[(int)((buffsize - FLAG_LENGTH) / FLOAT32_BYTE)];   // max float data length;
-		double recv_double_data[(int)((buffsize - FLAG_LENGTH) / FLOAT64_BYTE)]; // max double data length;
 		
 		/*********************************data copy**************************************/
 	    //data array copy: from byte array to byte array with data length = lens
@@ -65,6 +67,9 @@ class Data_transfer: public Tcpsocket, public Number_conver
         void data_array_copy(double *output, double *input, int lens);
 		
     private:
+	    char send_char[BUFFSIZE];
+	    char recv_char[BUFFSIZE];
+		
 	    //data array copy: from byte array to char array with data length = lens
         void data_array_copy(char *output, unsigned char *input, int lens);
 		//data array copy: from char array to byte array with data length = lens
@@ -78,13 +83,11 @@ class Data_transfer: public Tcpsocket, public Number_conver
         void float2send_char(const float *data, unsigned int data_lens);
         // from a double array to a send char array []
         void double2send_char(const double *data, unsigned int data_lens);
-		// trans recv char array [] to float array:
-        void recv_char2float();
-        // trans recv char array [] to double array:
-        void recv_char2double();
 		
-		char send_char[buffsize];
-	    char recv_char[buffsize];
+		// trans recv char array [] to float array: return data length
+        int recv_char2float();
+        // trans recv char array [] to double array: return data length
+        int recv_char2double();
 };
 
 #endif

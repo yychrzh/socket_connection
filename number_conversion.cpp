@@ -745,7 +745,7 @@ double Number_conver::byte2double(const unsigned char *bys)
 void Number_conver::float_array2bys(const float *data, unsigned char *bys, int data_lens)
 {
 	for (int i = 0;i < data_lens;i++){
-		float2byte(data[i], &bys[FLOAT32_BYTE * i])
+		float2byte(data[i], &bys[FLOAT32_BYTE * i]);
 	}
 }
 
@@ -753,7 +753,7 @@ void Number_conver::float_array2bys(const float *data, unsigned char *bys, int d
 void Number_conver::double_array2bys(const double *data, unsigned char *bys, int data_lens)
 {
 	for (int i = 0;i < data_lens;i++){
-		double2byte(data[i], &bys[FLOAT64_BYTE * i])
+		double2byte(data[i], &bys[FLOAT64_BYTE * i]);
 	}
 }
 		
@@ -761,7 +761,7 @@ void Number_conver::double_array2bys(const double *data, unsigned char *bys, int
 void Number_conver::bys2float_array(float *data, const unsigned char *bys, int data_lens)
 {
 	for (int i = 0;i < data_lens;i++){
-		data[i] = byte2float(&bys[FLOAT32_BYTE * i])
+		data[i] = byte2float(&bys[FLOAT32_BYTE * i]);
 	}
 }
 
@@ -769,7 +769,7 @@ void Number_conver::bys2float_array(float *data, const unsigned char *bys, int d
 void Number_conver::bys2double_array(double *data, const unsigned char *bys, int data_lens)
 {
 	for (int i = 0;i < data_lens;i++){
-		data[i] = byte2double(&bys[FLOAT64_BYTE * i])
+		data[i] = byte2double(&bys[FLOAT64_BYTE * i]);
 	}
 }
 
