@@ -741,6 +741,38 @@ double Number_conver::byte2double(const unsigned char *bys)
 	return double_data;
 }
 
+// form float array to bytes (unsigned char array)
+void Number_conver::float_array2bys(const float *data, unsigned char *bys, int data_lens)
+{
+	for (int i = 0;i < data_lens;i++){
+		float2byte(data[i], &bys[FLOAT32_BYTE * i])
+	}
+}
+
+// form double array to bytes (unsigned char array)
+void Number_conver::double_array2bys(const double *data, unsigned char *bys, int data_lens)
+{
+	for (int i = 0;i < data_lens;i++){
+		double2byte(data[i], &bys[FLOAT64_BYTE * i])
+	}
+}
+		
+// from bytes (unsigned char array) to float array
+void Number_conver::bys2float_array(float *data, const unsigned char *bys, int data_lens)
+{
+	for (int i = 0;i < data_lens;i++){
+		data[i] = byte2float(&bys[FLOAT32_BYTE * i])
+	}
+}
+
+// from bytes (unsigned char array) to double array
+void Number_conver::bys2double_array(double *data, const unsigned char *bys, int data_lens)
+{
+	for (int i = 0;i < data_lens;i++){
+		data[i] = byte2double(&bys[FLOAT64_BYTE * i])
+	}
+}
+
 /******************************************bin*******************************************/
 
 // from byte to binary: unsigned char to char [8]: (L->R, High->Low)
@@ -1369,6 +1401,7 @@ void test_float_bin(Number_conver number_c)
 	return;
 }
 
+/* 
 int main(int argc, char *argv[])
 {
 	Number_conver number_c(true);
@@ -1379,3 +1412,4 @@ int main(int argc, char *argv[])
 	
 	return 0;
 }
+*/

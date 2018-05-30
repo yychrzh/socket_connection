@@ -13,7 +13,7 @@ void server_test(Tcpsocket conn);
 void client_test(Tcpsocket conn);
 
 
-void time_delay(int time_flag)
+void time_delay(int time_flag)  // delay 1000 * time_flag
 {
 	int k = 0;
 	for (int i = 0; i < time_flag; i++)

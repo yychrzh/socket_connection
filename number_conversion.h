@@ -63,6 +63,14 @@ class Number_conver
         float byte2float(const unsigned char *bys);
 		double byte2double(const unsigned char *bys);
 		
+		// form float or double array to bytes (unsigned char array): data_lens: float or double data length
+        void float_array2bys(const float *data, unsigned char *bys, int data_lens);
+		void double_array2bys(const double *data, unsigned char *bys, int data_lens);
+		
+		// from bytes (unsigned char array) to float or double array: data_lens: float or double data length
+        void bys2float_array(float *data, const unsigned char *bys, int data_lens);
+		void bys2double_array(double *data, const unsigned char *bys, int data_lens);
+		
 		/*******************************bin********************************/
 		// from byte to binary: unsigned char to char [8]
 		void byte2bin(unsigned char x, char *bins);
