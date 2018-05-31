@@ -127,10 +127,10 @@ void Data_transfer::double2send_char(const double *data, int data_lens)
 	// add data length's low byte:
     send_char[DATA_LEN_POSITION + 1] = byte2char((unsigned char)(data_lens % 256));
 	
-	printf("check point 2\n");
+	// printf("check point 2\n");
     // add data:
 	data_array_copy(&send_char[DATA_POSITION], double_bytes, FLOAT64_BYTE * data_lens);
-	printf("check point 3\n");
+	// printf("check point 3\n");
 	return;
 } 
 

@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/linux_protocol.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/linux_protocol.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux_protocol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/number_conversion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/number_conversion.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_protocol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_tcpsocket.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_tcpsocket.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_c.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test_c.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_python.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -73,8 +67,8 @@
       <file leaf-file-name="test_code.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_code.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="89" column="16" lean-forward="true" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
+            <state relative-caret-position="903">
+              <caret line="83" column="17" lean-forward="true" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -702,8 +696,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_code.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="89" column="16" lean-forward="true" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
+        <state relative-caret-position="903">
+          <caret line="83" column="17" lean-forward="true" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
         </state>
       </provider>
     </entry>

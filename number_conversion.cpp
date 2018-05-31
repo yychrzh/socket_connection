@@ -712,13 +712,12 @@ void Number_conver::float2byte(float x, unsigned char *bys)
 // form double to bytes (unsigned char array)
 void Number_conver::double2byte(double x, unsigned char *bys)
 {
-	printf("check char\n");
+	// printf("check char\n");
 	char double_bin[FLOAT64_BIT];
-	printf("check bin\n");
+	// printf("check bin\n");
 	double2bin(x, double_bin);
-	printf("check bys\n");
+	// printf("check bys\n");
 	bin2bys(bys, double_bin, FLOAT64_BYTE);
-	
 }
 
 // from bytes (unsigned char array) to float 
@@ -755,7 +754,8 @@ void Number_conver::float_array2bys(const float *data, unsigned char *bys, int d
 void Number_conver::double_array2bys(const double *data, unsigned char *bys, int data_lens)
 {
 	for (int i = 0;i < data_lens;i++){
-		debug_print("double_array i", &i, 1);
+		// debug_print("double_array i", &i, 1);
+		// printf("double_array: %d\n", i);
 		double2byte(data[i], &bys[FLOAT64_BYTE * i]);
 	}
 }
@@ -812,6 +812,7 @@ void Number_conver::bys2bin(const unsigned char *bys, char *bins, int bit)
 	for (int i = 0;i < bit;i++){
 		byte2bin(bys[i], &bins[8 * i]);
 	}
+	return;
 }
 
 // from binary to bytes: char [] to unsigned char []: bit: lens of bytes:
@@ -820,6 +821,7 @@ void Number_conver::bin2bys(unsigned char *bys, const char *bins, int bit)
 	for (int i = 0;i < bit;i++){
 		bys[i] = bin2byte(&bins[8 * i]);
 	}
+	return;
 }
 
 // from float(decimal) to binary (char array): the lens of bins must be longer than bit
@@ -829,6 +831,7 @@ void Number_conver::dec2bin(float x, char *bins, int bit)
 	int i = 0;
 	unsigned char current_bit = 0;
 	
+	/*
 	x -= (int)x;
 	while (x){
 	    x *= 2;
@@ -847,7 +850,23 @@ void Number_conver::dec2bin(float x, char *bins, int bit)
 		for (int j = 0;j < (bit - accuracy_bit);j++){
 			bins[i + j] = 0;
 		}
+	}*/
+	
+	x -= (int)x;
+	while (x && (i < bit)){
+	    x *= 2;
+        current_bit = (x >= 1.0)?1:0;
+		bins[i] = current_bit;
+		x -= (int)x;
+        i++;		
 	}
+	if (i < bit){
+		for (int j = i;j < bit;j++){
+			bins[j] = 0;
+		}
+	}
+	
+	return;
 }
 
 // from double (decimal) to binary (char array)
@@ -857,6 +876,7 @@ void Number_conver::dec2bin(double x, char *bins, int bit)
 	int i = 0;
 	unsigned char current_bit = 0;
 	
+	/*
 	x -= (long int)x;
 	while (x){
 	    x *= 2;
@@ -875,7 +895,22 @@ void Number_conver::dec2bin(double x, char *bins, int bit)
 		for (int j = 0;j < (bit - accuracy_bit);j++){
 			bins[i + j] = 0;
 		}
+	}*/
+	
+	x -= (long int)x;
+	while (x && (i < bit)){
+	    x *= 2;
+        current_bit = (x >= 1.0)?1:0;
+		bins[i] = current_bit;
+		x -= (long int)x;
+        i++;		
 	}
+	if (i < bit){
+		for (int j = i;j < bit;j++){
+			bins[j] = 0;
+		}
+	}
+	return;
 }
 
 //from binary (char array) to float (decimal)
@@ -884,7 +919,9 @@ float Number_conver::bin2dec_float(const char *bins, int bit)
 	float dec_float = 0;
 	
 	for (int i = 0;i < bit;i++){
-		dec_float += bins[i] * pow(2, -i-1);
+		if (bins[i] != 0){
+		    dec_float += bins[i] * pow(2, -i-1);
+		}
 	}
 	return dec_float;
 }
@@ -895,7 +932,9 @@ double Number_conver::bin2dec_double(const char *bins, int bit)
 	double dec_float = 0;
 	
 	for (int i = 0;i < bit;i++){
-		dec_float += bins[i] * pow(2, -i-1);
+	    if (bins[i] != 0){
+		    dec_float += bins[i] * pow(2, -i-1);
+		}
 	}
 	return dec_float;
 }
@@ -906,7 +945,7 @@ void Number_conver::int2bin(int x, char *bins, int bit)   // lens of bins > bit
 	int int_data = x;
 	int i = 0;
 	
-	while (int_data){
+	while (int_data && (i < bit)){
 		bins[bit - 1 - i] = int_data % 2;
 		int_data = int_data / 2;
 		i++;
@@ -924,7 +963,7 @@ void Number_conver::long2bin(long int x, char *bins, int bit)
 	long int long_data = x;
 	int i = 0;
 	
-	while (long_data){
+	while (long_data && (i < bit)){
 		bins[bit - 1 - i] = long_data % 2;
 		long_data = long_data / 2;
 		i++;
@@ -1013,8 +1052,10 @@ void Number_conver::float2bin(float x, char *bins)   // bins[32]
 			if (int_bin[i] != 0){
 				int_exponent = FLOAT32_BIT - i;
 			    debug_print("int_exponent", &int_exponent, 1);
-				for (j = i + 1;j < FLOAT32_BIT;j++){
-					fraction_bin[j - i - 1] = int_bin[j];
+				for (j = i + 1;j < (FLOAT32_FRACTION + i + 1);j++){
+					if (j < FLOAT32_BIT){
+					    fraction_bin[j - i - 1] = int_bin[j];
+					}
 				}
 				break;
 			}
@@ -1022,10 +1063,14 @@ void Number_conver::float2bin(float x, char *bins)   // bins[32]
 		debug_print("fraction_1", fraction_bin, int_exponent - 1);
 		// dec_x:
 		int rest_bits = FLOAT32_FRACTION - (int_exponent - 1);
-		for (i = 0;i < rest_bits;i++){
-			fraction_bin[int_exponent - 1 + i] = dec_bin[i];
+		if (rest_bits > 0){
+		    for (i = 0;i < rest_bits;i++){
+				if (i < FLOAT32_BIT){
+			        fraction_bin[int_exponent - 1 + i] = dec_bin[i];
+				}
+		    }
+		    debug_print("fraction_bin", fraction_bin, FLOAT32_FRACTION);
 		}
-		debug_print("fraction_bin", fraction_bin, FLOAT32_FRACTION);
 	} //if (int_x)
 	else{
 		int i, j;
@@ -1034,21 +1079,24 @@ void Number_conver::float2bin(float x, char *bins)   // bins[32]
 			if (dec_bin[i] != 0){
 				int_exponent = -i;
 				for (j = i + 1;j < (FLOAT32_FRACTION + i + 1);j++){
-					fraction_bin[j - i - 1] = dec_bin[j];
+					if (j < FLOAT32_BIT){
+					    fraction_bin[j - i - 1] = dec_bin[j];
+					}
 				}
 				break;
 			}
 		}
 		debug_print("fraction_bin", fraction_bin, FLOAT32_FRACTION);
 	}// else
-	
+	/*
     float dec = 0;
-    for (int i = 0;i < FLOAT32_BIT;i++){
+    for (int i = 0;i < FLOAT32_FRACTION;i++){
 		if (fraction_bin[i] != 0){
 		    dec += fraction_bin[i] * pow(2, -(i + 1));
 	    }
 	}
 	debug_print("dec", &dec, 1);
+	*/
 
     // calculate exponent: float32, 8 bit
     int_exponent += (FLOAT32_EXPONENT_OFFSET - 1);
@@ -1071,19 +1119,20 @@ void Number_conver::float2bin(float x, char *bins)   // bins[32]
 
 void Number_conver::double2bin(double x, char *bins)  // bins[64] 
 {
-	char exponent_bin[FLOAT64_EXPONENT];              // 8 bits
-	char fraction_bin[FLOAT64_FRACTION];              // 23 bits
-    char long_bin[FLOAT64_BIT];                        // 32 bytes 
-	char dec_bin[FLOAT64_BIT];                        // 32 bytes
+	char exponent_bin[FLOAT64_EXPONENT];                // 11 bits
+	char fraction_bin[FLOAT64_FRACTION];                // 52 bits
+    char long_bin[FLOAT64_BIT];                         // 64 bits
+	char dec_bin[FLOAT64_BIT];                          // 64 bits
 	double abs_x, dec_x;
 	long int long_x;
 	unsigned int sign;
 	
 	// initiate memory:
+
 	memset(exponent_bin, '\0', FLOAT64_EXPONENT);
     memset(fraction_bin, '\0', FLOAT64_FRACTION);
 	memset(long_bin, '\0', FLOAT64_BIT);
-    memset(dec_bin, '\0', FLOAT64_BIT);
+    memset(dec_bin, '\0', FLOAT64_BIT); 
 	
 	sign = (x < 0.0)? 1 : 0;
 	abs_x = (x < 0.0) ? (-x) : x;
@@ -1119,19 +1168,25 @@ void Number_conver::double2bin(double x, char *bins)  // bins[64]
 			if (long_bin[i] != 0){
 				int_exponent = FLOAT64_BIT - i;
 			    debug_print("int_exponent", &int_exponent, 1);
-				for (j = i + 1;j < FLOAT64_BIT;j++){
-					fraction_bin[j - i - 1] = long_bin[j];
+				for (j = i + 1;j < (FLOAT64_FRACTION + i + 1);j++){
+					if (j < FLOAT64_BIT){
+					    fraction_bin[j - i - 1] = long_bin[j];
+					}
 				}
 				break;
 			}
 		}
-		debug_print("fraction_1", fraction_bin, int_exponent - 1);
+		debug_print("fraction_1", fraction_bin, FLOAT64_FRACTION);
 		// dec_x:
 		int rest_bits = FLOAT64_FRACTION - (int_exponent - 1);
-		for (i = 0;i < rest_bits;i++){
-			fraction_bin[int_exponent - 1 + i] = dec_bin[i];
+		if (rest_bits > 0){
+		    for (i = 0;i < rest_bits;i++){
+			    if (i < FLOAT64_BIT){
+			        fraction_bin[int_exponent - 1 + i] = dec_bin[i];
+			    }
+		    }
+		    debug_print("fraction_bin", fraction_bin, FLOAT64_FRACTION);	
 		}
-		debug_print("fraction_bin", fraction_bin, FLOAT64_FRACTION);
 	} //if (int_x)
 	else{
 		int i, j;
@@ -1140,21 +1195,15 @@ void Number_conver::double2bin(double x, char *bins)  // bins[64]
 			if (dec_bin[i] != 0){
 				int_exponent = -i;
 				for (j = i + 1;j < (FLOAT64_FRACTION + i + 1);j++){
-					fraction_bin[j - i - 1] = dec_bin[j];
+					if (j < FLOAT64_BIT){
+					    fraction_bin[j - i - 1] = dec_bin[j];
+					}
 				}
 				break;
 			}
 		}
 		debug_print("fraction_bin", fraction_bin, FLOAT64_FRACTION);
 	}// else
-	
-    double dec = 0;
-    for (int i = 0;i < FLOAT64_BIT;i++){
-		if (fraction_bin[i] != 0){
-		    dec += fraction_bin[i] * pow(2, -(i + 1));
-	    }
-	}
-	debug_print("dec", &dec, 1);
 
     // calculate exponent: float64, 11 bit
     int_exponent += (FLOAT64_EXPONENT_OFFSET - 1);
@@ -1164,7 +1213,7 @@ void Number_conver::double2bin(double x, char *bins)  // bins[64]
 	debug_print("exponent_bin", exponent_bin, FLOAT64_EXPONENT);
 	
 	// copy bits:
-	bins[0] = sign;
+	bins[0] = char(sign);
 	for (int i = 0;i < FLOAT64_EXPONENT;i++){
 		bins[i + 1] = exponent_bin[i];
 	}
@@ -1172,6 +1221,7 @@ void Number_conver::double2bin(double x, char *bins)  // bins[64]
 		bins[i + 1 + FLOAT64_EXPONENT] = fraction_bin[i];
 	}
     debug_print("bins", bins, FLOAT64_BIT);
+	// printf("return double2bin !\n");
 	return;
 }
 		

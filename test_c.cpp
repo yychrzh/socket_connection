@@ -268,7 +268,7 @@ int main(int argc, char *argv[])
 			printf("create socket server, waiting for client:\n");
 			// Tcpsocket conn("server", port_num, buffsize, true);
 			// server_test(conn);
-			Data_transfer conn("server", port_num, buffsize, true);
+			Data_transfer conn("server", port_num, buffsize, false);
 		}
 		else if (0 == strcmp(socket_type, "client")){
 			printf("create socket client, please input server ip(default: '127.0.0.1'):\n");
@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
 				// Tcpsocket conn("client", port_num, buffsize, server_ip, true);
 				// client_test(conn);
 				// char_test(conn);
-				Data_transfer conn("client", port_num, buffsize, server_ip, true);
+				Data_transfer conn("client", port_num, buffsize, server_ip, false);
 				float_test(conn);
 			}
 			else{
