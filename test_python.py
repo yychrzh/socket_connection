@@ -1,7 +1,16 @@
 #-*-coding:utf-8-*-
-from py_tcpsocket import tcpsocket
 import time
-from number_conversion import *
+import random
+# from py_tcpsocket import Tcpsocket
+# from number_conversion import *
+from py_protocol import Data_transfer
+
+# send data flag: 0~127
+CONNECTION_FLAG          = 1
+DATA_FLAG                = 2
+EPISODE_START_FLAG       = 3
+EPISODE_END_FLAG         = 4
+TERMINATION_FLAG         = 5
 
 
 def read_one_line_from_screen():
@@ -38,17 +47,67 @@ def client_test(conn):
 
 
 # test in server mode:
-def byte_test(conn):
+def byte_test(conn, n_c):
     recv_bytes = conn.recv_bytes()
     print("recv_bytes: ", recv_bytes)
     print("recv_lens: ", len(recv_bytes))
     print("recv type: ", type(recv_bytes))
     int_bytes = [int(v) for v in recv_bytes]
     for i in range(len(int_bytes)):
-        int_bytes[i] = byte2char(int_bytes[i])
+        int_bytes[i] = n_c.byte2char(int_bytes[i])
     print("recv_int: ", int_bytes)
     send_bytes = bytes([0, 64, 127, 192, 255, 128])
     conn.send_bytes(send_bytes)
+
+
+# test in mode server
+def float_test(conn):
+    DATA_LENS = 50
+    MAX_COUNT = 100
+    count = 0
+    error_count = 0
+
+    # recv connect flag:
+    print("waiting for connection flag...")
+    recv_flag, _ = conn.recv_data()
+    if CONNECTION_FLAG != recv_flag:
+        print("connect with client error !")
+        return
+    else:
+        print("connect with client success !")
+    time.sleep(0.05)
+
+    start_time = time.time()
+    while True:
+        send_array = []
+        for i in range(DATA_LENS):
+            send_array.append(random.uniform(-1000000, 1000000))  # produce 50 random float numbers
+
+        print("send double data to client: ")
+        # print(send_array)
+        conn.send_data(send_array, bit=64)
+
+        print("data sent success, waiting for response !")
+        recv_flag, recv_array = conn.recv_data()
+
+        if DATA_FLAG == recv_flag:
+            for i in range(DATA_LENS):
+                if recv_array[i] != send_array[i]:
+                    print("error emerged in %d 's recv int the %d 's data, expect %.15f, but received %.15f"
+                          % (count, i, send_array[i], recv_array[i]))
+                    error_count += 1
+
+        time.sleep(0.05)
+
+        current_time = time.time() - start_time
+        print(">>>count: %3d, current_time: %.15f sec" % (count, current_time))
+        count += 1
+
+        if 100 == count:
+            conn.send_flag(TERMINATION_FLAG)
+            print("data transmission end, with %d data transfered error in total %d data"
+                  % (error_count, DATA_LENS * MAX_COUNT))
+            break
 
 
 if __name__ == "__main__":
@@ -65,13 +124,16 @@ if __name__ == "__main__":
     socket_type = recv_str
     if socket_type == 'server':
         print("create socket server, waiting for client:")
-        conn = tcpsocket(conn_type=socket_type, port_num=port_num, buffsize=200, debug_print=True)
+        # conn = Tcpsocket(conn_type=socket_type, port_num=port_num, buffsize=200, debug_print=True)
+        conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, debug_print=False)
         # server_test(conn)
-        byte_test(conn)
+        # byte_test(conn)
+        float_test(conn)
     elif socket_type == 'client':
         print("create socket client, please input server ip(default: '127.0.0.1'):")
         recv_str = read_one_line_from_screen()
-        conn = tcpsocket(conn_type=socket_type, port_num=port_num, buffsize=200, host=recv_str, debug_print=True)
-        client_test(conn)
+        # conn = Tcpsocket(conn_type=socket_type, port_num=port_num, buffsize=200, host=recv_str, debug_print=True)
+        # client_test(conn)
+        conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, host=recv_str, debug_print=False)
     else:
         print("socket type input error !")

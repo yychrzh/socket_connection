@@ -78,7 +78,6 @@ void Number_conver::debug_print(const char *infostr, const double *infodouble, i
 	}
 }
 
-
 /**********************************************byte******************************************/
 
 // from float (decimal) to bytes (unsigned char array)
@@ -713,10 +712,13 @@ void Number_conver::float2byte(float x, unsigned char *bys)
 // form double to bytes (unsigned char array)
 void Number_conver::double2byte(double x, unsigned char *bys)
 {
+	printf("check char\n");
 	char double_bin[FLOAT64_BIT];
-	
+	printf("check bin\n");
 	double2bin(x, double_bin);
+	printf("check bys\n");
 	bin2bys(bys, double_bin, FLOAT64_BYTE);
+	
 }
 
 // from bytes (unsigned char array) to float 
@@ -753,6 +755,7 @@ void Number_conver::float_array2bys(const float *data, unsigned char *bys, int d
 void Number_conver::double_array2bys(const double *data, unsigned char *bys, int data_lens)
 {
 	for (int i = 0;i < data_lens;i++){
+		debug_print("double_array i", &i, 1);
 		double2byte(data[i], &bys[FLOAT64_BYTE * i]);
 	}
 }
@@ -1225,7 +1228,7 @@ char Number_conver::byte2char(unsigned char x)
 	sign = temp_bin[0];  
 	temp_bin[0] = 0;
 	char_data = bin2int(temp_bin, 8);
-	debug_print("char_data", &char_data, 1);
+	debug_print("abs_char_data", &char_data, 1);
 	if (sign == 1 && char_data == 0){
 		return -128;
 	}

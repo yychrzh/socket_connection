@@ -7,7 +7,7 @@ def dec2bin(x):
   bins = []
   while x:
     x *= 2
-    bins.append(1 if x>=1. else 0)
+    bins.append(1 if x >=1. else 0)
     x -= int(x)
   return bins
 
@@ -68,6 +68,27 @@ class C(A, B):
         self.func2()
 
 
+def test_byte_char():
+    from number_conversion import Number_conver
+    n_c = Number_conver(False)
+    o = [0, 64, 128, 192, 255]
+    a = bytes(o)
+    print([int(a[0])])
+    b = [n_c.byte2char(v) for v in a]
+    c = [n_c.char2byte(v) for v in b]
+    print(o)
+    print(b)
+    print(c)
+
+
+def test_bytes():
+    a = bytes([5])
+    b = 3
+    print(a[0] > 2)
+
+
 if __name__ == "__main__":
-    oc = C('fork')
-    oc.func3()
+    # oc = C('fork')
+    # oc.func3()
+    # test_byte_char()
+    test_bytes()

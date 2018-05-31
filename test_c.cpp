@@ -13,6 +13,8 @@ void server_test(Tcpsocket conn);
 
 void client_test(Tcpsocket conn);
 
+void float_test(Data_transfer conn);
+
 void test_tcp();
 
 
@@ -127,6 +129,52 @@ void client_test(Tcpsocket conn)
 	}
 }
 
+void float_test(Data_transfer conn)
+{
+	unsigned char data_type = 0;
+	int data_lens = 0;
+	unsigned char recv_flag;
+	
+	// send connection_flag:
+	printf("send connection flag...\n");
+	conn.send_flag((unsigned char)(CONNECTION_FLAG));
+	
+	while (1){
+		// waiting for data or flag:
+		printf("waiting for data or flag...\n");
+		recv_flag = 0;
+		data_type = 0;
+		data_lens = 0;
+		conn.recv_data(&recv_flag, &data_type, &data_lens);
+		printf("receive recv_flag: %d, data_type: %d, data_lens: %d\n", recv_flag, data_type, data_lens);
+		
+		if (TERMINATION_FLAG == recv_flag){
+			printf("receive termination flag, close connection !\n");
+			conn.close_socket();
+			break;
+		}
+		else if (DATA_FLAG == recv_flag){
+			printf("send the received data as response !\n");
+			time_delay(50);
+			
+			if (DATA_FLOAT32 == data_type){
+				// printf("receive float data with length %d, return them !\n", data_lens);
+			    conn.send_data(conn.recv_float_data, data_lens);
+		    }
+		    else if (DATA_FLOAT64 == data_type){
+				// for (int i = 0;i < data_lens;i++){
+				//    printf("%f ", conn.recv_double_data[i]);
+				// }
+				// printf("\n");
+				// printf("receive double data with length %d, return them !\n", data_lens);
+			    conn.send_data(conn.recv_double_data, data_lens);
+				printf("data send success !\n");
+		    }
+		}
+	}
+	return;
+}
+
 void test_tcp()
 {
 	char socket_type[10];
@@ -188,13 +236,14 @@ void test_tcp()
 	return;
 }
 
+
 int main(int argc, char *argv[])
 {
 	char socket_type[10];
 	char socket_port_num[10];
 	char server_ip[50];
 	int port_num = 8088;
-	int buffsize = 200;
+	int buffsize = 2048;
 	int read_lens = 0;
 	
 	memset(socket_port_num, '\0', 10);
@@ -233,6 +282,7 @@ int main(int argc, char *argv[])
 				// client_test(conn);
 				// char_test(conn);
 				Data_transfer conn("client", port_num, buffsize, server_ip, true);
+				float_test(conn);
 			}
 			else{
 				printf("inpput server ip wrong !\n");
@@ -245,7 +295,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	else{
-		printf("input socket_type wrong !\n");
+		printf("input socket_type error !\n");
 	}
 
 	while (1){
