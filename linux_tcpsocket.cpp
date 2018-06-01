@@ -150,6 +150,17 @@ int Tcpsocket::recv_strings(void *recv_buf)
 	return recv_data_lens;
 }
 
+// recv data with length: recv_lens bytes:
+int Tcpsocket::recv_strings(void *recv_buf, int recv_lens)
+{
+	int recv_data_lens = 0;
+	recv_data_lens = recv(conn, recv_buf, recv_lens, 0);
+	if (recv_data_lens <= 0){
+		debug_print("the connection might have broken !\n");
+	}
+	return recv_data_lens;
+}
+
 // send_buf: char pointer that stores the strings will be sent
 void Tcpsocket::send_strings(const void *send_buf, int send_data_lens)
 {

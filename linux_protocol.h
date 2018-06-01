@@ -35,9 +35,9 @@
 #define EVEN_FLAG                0
 #define ODD_FLAG                 1
 
-#define CHAR_BUFFSIZE            2048
-#define FLOAT_BUFFSIZE           510      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT32_BYTE)
-#define DOUBLE_BUFFSIZE          255      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT64_BYTE)
+#define CHAR_BUFFSIZE            2048    // 2048
+#define FLOAT_BUFFSIZE           510    // 510      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT32_BYTE)
+#define DOUBLE_BUFFSIZE          255     // 255      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT64_BYTE)
 
 
 // a class for send float data
@@ -59,6 +59,9 @@ class Data_transfer: public Tcpsocket, public Number_conver
 		void send_data(double *data, int data_lens);
 		// send flag:
 		void send_flag(unsigned char flag);
+		
+		// recv all data
+		// void recv_loop(unsigned char *recv_flag, unsigned char *data_type, int *data_lens);
 		
 		/*********************************data copy**************************************/
 	    //data array copy: from byte array to byte array with data length = lens
@@ -89,9 +92,9 @@ class Data_transfer: public Tcpsocket, public Number_conver
         void double2send_char(const double *data, int data_lens);
 		
 		// trans recv char array [] to float array: return data length
-        int recv_char2float();
+        void recv_char2float(int data_lens);
         // trans recv char array [] to double array: return data length
-        int recv_char2double();
+        void recv_char2double(int data_lens);
 };
 
 #endif

@@ -112,12 +112,26 @@ class Data_transfer(Number_conver, Tcpsocket):
         self.debug_print("send_bys", send_bys, len(send_bys))
         self.send_bytes(send_bys)
 
-    def recv_data(self):
+    def recv_data(self, recv_lens=0):
         float_array = []
-        recv_char = self.recv_bytes()
+        recv_char = self.recv_bytes(recv_lens)
         recv_bys = self.recv_char2byte(recv_char)
         self.debug_print("recv_bys", recv_bys, len(recv_bys))
+
         recv_flag = int(recv_bys[TRANS_FLAG_POSITION])
         if DATA_FLAG == recv_flag:
+            # float_array, _ = self.recv_byte2float(recv_bys)
+            data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
+            data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
+            all_lens = 5 + data_length * int(data_type / 8)
+            received_lens = len(recv_bys)
+            rest_lens = all_lens - received_lens
+
+            while rest_lens:
+                recv_char = self.recv_bytes(rest_lens)
+                temp_bys = self.recv_char2byte(recv_char)
+                for i in range(len(temp_bys)):
+                    recv_bys.append(temp_bys[i])
+                rest_lens -= len(temp_bys)
             float_array, _ = self.recv_byte2float(recv_bys)
         return recv_flag, float_array

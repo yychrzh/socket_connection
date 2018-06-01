@@ -62,7 +62,7 @@ def byte_test(conn, n_c):
 
 # test in mode server
 def float_test(conn):
-    DATA_LENS = 50
+    DATA_LENS = 300
     MAX_COUNT = 100
     count = 0
     error_count = 0
@@ -75,17 +75,18 @@ def float_test(conn):
         return
     else:
         print("connect with client success !")
-    time.sleep(0.05)
 
     start_time = time.time()
     while True:
         send_array = []
         for i in range(DATA_LENS):
-            send_array.append(random.uniform(-1000000, 1000000))  # produce 50 random float numbers
+            send_array.append(random.uniform(-1e15, 1e15))  # produce 50 random float numbers
 
         print("send double data to client: ")
         # print(send_array)
         conn.send_data(send_array, bit=64)
+
+        # time.sleep(0.05)
 
         print("data sent success, waiting for response !")
         recv_flag, recv_array = conn.recv_data()
@@ -96,8 +97,6 @@ def float_test(conn):
                     print("error emerged in %d 's recv int the %d 's data, expect %.15f, but received %.15f"
                           % (count, i, send_array[i], recv_array[i]))
                     error_count += 1
-
-        time.sleep(0.05)
 
         current_time = time.time() - start_time
         print(">>>count: %3d, current_time: %.15f sec" % (count, current_time))

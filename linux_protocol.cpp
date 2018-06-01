@@ -135,9 +135,9 @@ void Data_transfer::double2send_char(const double *data, int data_lens)
 } 
 
 // trans recv char array [] to float array:
-int Data_transfer::recv_char2float()
+void Data_transfer::recv_char2float(int data_lens)
 {
-	unsigned int data_lens = 0;
+	// int data_lens = 0;
 	unsigned char parity_flag = 0;
 	
 	// get data_lens of float data:
@@ -156,19 +156,19 @@ int Data_transfer::recv_char2float()
 		bys2float_array(recv_float_data, float_bytes, data_lens);
 	}
 	else{
-		printf("parity check error !");
+		printf("parity check error !\n");
 	}
-	return data_lens;
+	return;
 }
 
 // trans recv char array [] to double array:
-int Data_transfer::recv_char2double()
+void Data_transfer::recv_char2double(int data_lens)
 {
-	int data_lens = 0;
+	// int data_lens = 0;
 	unsigned char parity_flag = 0;
 	
 	// get data_lens of float data:
-	data_lens = char2byte(recv_char[DATA_LEN_POSITION]) * 256 + char2byte(recv_char[DATA_LEN_POSITION + 1]);
+	// data_lens = char2byte(recv_char[DATA_LEN_POSITION]) * 256 + char2byte(recv_char[DATA_LEN_POSITION + 1]);
 	
 	// get byte data:
 	unsigned char double_bytes[FLOAT64_BYTE * data_lens]; // bytes
@@ -183,19 +183,61 @@ int Data_transfer::recv_char2double()
 		bys2double_array(recv_double_data, double_bytes, data_lens);
 	}
 	else{
-		printf("parity check error !");
+		printf("parity check error !\n");
 	}
-	return data_lens;
+	return;
 }
 
 /**********************************send recv**************************************/
+// recv all data
+void Data_transfer::recv_data(unsigned char *recv_flag, unsigned char *data_type, int *data_lens)
+{
+	int all_lens = 0;
+	int recv_data_lens = 0;
+    int rest_lens = 0;
+	int received_lens = 0;
+	
+	recv_data_lens = recv_strings(recv_char);
+	if (recv_data_lens <= 0){
+		printf("receive error ! num: %d\n", recv_data_lens);
+		return;
+	}
+	// get recv flag:
+	*recv_flag = char2byte(recv_char[TRANS_FLAG_POSITION]);
+	if (*recv_flag != DATA_FLAG){
+		return;
+	}
+	// get data_type and data_length:
+	*data_type = char2byte(recv_char[DATA_TYPE_POSITION]);
+	*data_lens = char2byte(recv_char[DATA_LEN_POSITION]) * 256 + char2byte(recv_char[DATA_LEN_POSITION + 1]);
+	all_lens = 5 + (*data_lens) * (*data_type / 8);
+	received_lens = recv_data_lens;
+	rest_lens = all_lens - received_lens;
+	while (rest_lens){
+		recv_data_lens = recv_strings(&recv_char[received_lens], rest_lens);
+		if (recv_data_lens <= 0){
+		    printf("receive error ! num: %d\n", recv_data_lens);
+		    return;
+	    }
+		received_lens += recv_data_lens;
+		rest_lens -= recv_data_lens;
+	}
+	if (DATA_FLOAT32 == (*data_type)){
+	    recv_char2float(*data_lens);
+    }
+	else if (DATA_FLOAT64 == (*data_type)){
+		recv_char2double(*data_lens);
+	}
+}
+
+/*
 // recv float or double data 
 void Data_transfer::recv_data(unsigned char *recv_flag, unsigned char *data_type, int *data_lens)
 {
     int recv_data_lens = 0;
-    unsigned char parity_flag = 0;  
 
 	recv_data_lens = recv_strings(recv_char);
+	printf("recv_data_lens: %d\n", recv_data_lens);
     if (recv_data_lens){
         // get recv flag:
 	    *recv_flag = char2byte(recv_char[TRANS_FLAG_POSITION]);
@@ -216,6 +258,7 @@ void Data_transfer::recv_data(unsigned char *recv_flag, unsigned char *data_type
 	}
 	return;
 }
+*/
 
 // send float data
 void Data_transfer::send_data(float *data, int data_lens)

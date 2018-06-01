@@ -134,6 +134,7 @@ void float_test(Data_transfer conn)
 	unsigned char data_type = 0;
 	int data_lens = 0;
 	unsigned char recv_flag;
+	int count = 0;
 	
 	// send connection_flag:
 	printf("send connection flag...\n");
@@ -141,10 +142,11 @@ void float_test(Data_transfer conn)
 	
 	while (1){
 		// waiting for data or flag:
-		printf("waiting for data or flag...\n");
+		printf(">>>%3d waiting for data or flag...\n", count);
 		recv_flag = 0;
 		data_type = 0;
 		data_lens = 0;
+		// time_delay(50);
 		conn.recv_data(&recv_flag, &data_type, &data_lens);
 		printf("receive recv_flag: %d, data_type: %d, data_lens: %d\n", recv_flag, data_type, data_lens);
 		
@@ -155,7 +157,6 @@ void float_test(Data_transfer conn)
 		}
 		else if (DATA_FLAG == recv_flag){
 			printf("send the received data as response !\n");
-			time_delay(50);
 			
 			if (DATA_FLOAT32 == data_type){
 				// printf("receive float data with length %d, return them !\n", data_lens);
@@ -171,6 +172,7 @@ void float_test(Data_transfer conn)
 				printf("data send success !\n");
 		    }
 		}
+		count++;
 	}
 	return;
 }
@@ -243,7 +245,7 @@ int main(int argc, char *argv[])
 	char socket_port_num[10];
 	char server_ip[50];
 	int port_num = 8088;
-	int buffsize = 2048;
+	int buffsize = 2048; // 2048;
 	int read_lens = 0;
 	
 	memset(socket_port_num, '\0', 10);

@@ -60,8 +60,11 @@ class Tcpsocket(object):
         if real_send_lens < len(send_bytes):
             self.t_debug_print("not all data has been sent")
 
-    def recv_bytes(self):
-        recv_b = self.conn.recv(self.BUFFSIZE)
+    def recv_bytes(self, recv_lens=0):
+        if recv_lens == 0:
+            recv_b = self.conn.recv(self.BUFFSIZE)
+        else:
+            recv_b = self.conn.recv(recv_lens)
         if recv_b is b'':
             self.t_debug_print("the connection might have broken !")
         return recv_b
