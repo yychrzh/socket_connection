@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/linux_protocol.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/linux_protocol.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux_tcpsocket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/linux_tcpsocket.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux_tcpsocket.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux_tcpsocket.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_protocol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_tcpsocket.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_tcpsocket.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_c.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test_c.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_python.py" afterDir="false" />
-    </list>
+    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -326,7 +317,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
