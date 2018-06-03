@@ -5,8 +5,7 @@
 //data array copy: from byte array to byte array with data length = lens
 void Data_transfer::data_array_copy(unsigned char *output, unsigned char *input, int lens)
 {
-	for (int i = 0; i < lens; i++)
-	{
+	for (int i = 0; i < lens; i++){
 		output[i] = input[i];
 	}    	
 }
@@ -14,8 +13,7 @@ void Data_transfer::data_array_copy(unsigned char *output, unsigned char *input,
 //data array copy: from byte array to char array with data length = lens
 void Data_transfer::data_array_copy(char *output, unsigned char *input, int lens)
 {
-    for (int i = 0; i < lens; i++)
-	{
+    for (int i = 0; i < lens; i++){
 		output[i] = byte2char(input[i]);
 	}
 }
@@ -23,8 +21,7 @@ void Data_transfer::data_array_copy(char *output, unsigned char *input, int lens
 //data array copy: from char array to byte array with data length = lens
 void Data_transfer::data_array_copy(unsigned char *output, char *input, int lens)
 {
-	for (int i = 0; i < lens; i++)
-	{
+	for (int i = 0; i < lens; i++){
 		output[i] = char2byte(input[i]);
 	}
 }
@@ -32,8 +29,7 @@ void Data_transfer::data_array_copy(unsigned char *output, char *input, int lens
 //data array copy: from char array to char array with data length = lens
 void Data_transfer::data_array_copy(char *output, char *input, int lens)
 {
-	for (int i = 0; i < lens; i++)
-	{
+	for (int i = 0; i < lens; i++){
 		output[i] = input[i];
 	}	
 }
@@ -41,8 +37,7 @@ void Data_transfer::data_array_copy(char *output, char *input, int lens)
 //data array copy: from float array to float array with data length = lens
 void Data_transfer::data_array_copy(float *output, float *input, int lens)
 {
-    for (int i = 0; i < lens; i++)
-	{
+    for (int i = 0; i < lens; i++){
 		output[i] = input[i];
 	}
 }
@@ -50,8 +45,7 @@ void Data_transfer::data_array_copy(float *output, float *input, int lens)
 //data array copy: from double array to double array with data length = lens
 void Data_transfer::data_array_copy(double *output, double *input, int lens)
 {
-	for (int i = 0; i < lens; i++)
-	{
+	for (int i = 0; i < lens; i++){
 		output[i] = input[i];
 	}
 }
@@ -61,13 +55,11 @@ void Data_transfer::data_array_copy(double *output, double *input, int lens)
 unsigned char Data_transfer::parity_check(unsigned char *data, int lens)
 {
 	int parity_num = 0;
-	for (int i = 0; i < lens; i++)
-	{
+	for (int i = 0; i < lens; i++){
 		parity_num += (data[i] % 2);
 	}
 
-	if (parity_num % 2)
-	{
+	if (parity_num % 2){
 		return ODD_FLAG;     //odd
 	}
     
@@ -105,7 +97,7 @@ void Data_transfer::float2send_char(const float *data, int data_lens)
 // trans a double array to a send char array []: len(send_char) = data_lens + 5, data_lens < 65535
 void Data_transfer::double2send_char(const double *data, int data_lens)
 {
-	unsigned char double_bytes[FLOAT64_BYTE * data_lens]; // bytes
+    unsigned char double_bytes[FLOAT64_BYTE * data_lens]; // bytes
 	
 	memset(double_bytes, '\0', FLOAT64_BYTE * data_lens);
 	
