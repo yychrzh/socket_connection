@@ -3,7 +3,7 @@
 
 void time_delay(int time_flag);
 
-void remove_new_line(char *str, int lens);
+void remove_new_line(char *str);
 
 int read_from_screen(char *recv_buf, int buffsize);
 

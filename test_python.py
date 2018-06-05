@@ -62,10 +62,10 @@ def byte_test(conn, n_c):
 
 # test in mode server
 def float_test(conn):
-    DATA_LENS = 300
     MAX_COUNT = 100
     count = 0
     error_count = 0
+    total_lens = 0
 
     # recv connect flag:
     print("waiting for connection flag...")
@@ -79,8 +79,9 @@ def float_test(conn):
     start_time = time.time()
     while True:
         send_array = []
-        for i in range(DATA_LENS):
-            send_array.append(random.uniform(-1e15, 1e15))  # produce 50 random float numbers
+        data_lens = random.randint(50, 250)
+        for i in range(data_lens):
+            send_array.append(random.uniform(-1e5, 1e5))  # produce 50 random float numbers
 
         print("send double data to client: ")
         # print(send_array)
@@ -92,7 +93,7 @@ def float_test(conn):
         recv_flag, recv_array = conn.recv_data()
 
         if DATA_FLAG == recv_flag:
-            for i in range(DATA_LENS):
+            for i in range(data_lens):
                 if recv_array[i] != send_array[i]:
                     print("error emerged in %d 's recv int the %d 's data, expect %.15f, but received %.15f"
                           % (count, i, send_array[i], recv_array[i]))
@@ -101,11 +102,12 @@ def float_test(conn):
         current_time = time.time() - start_time
         print(">>>count: %3d, current_time: %.15f sec" % (count, current_time))
         count += 1
+        total_lens += data_lens
 
-        if 100 == count:
+        if MAX_COUNT == count:
             conn.send_flag(TERMINATION_FLAG)
             print("data transmission end, with %d data transfered error in total %d data"
-                  % (error_count, DATA_LENS * MAX_COUNT))
+                  % (error_count, total_lens))
             break
 
 
