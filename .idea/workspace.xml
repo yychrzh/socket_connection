@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/py_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_protocol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_python.py" afterDir="false" />
-    </list>
+    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +18,8 @@
       <file leaf-file-name="test_python.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_python.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" column="33" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="33" />
+            <state relative-caret-position="432">
+              <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
               <folding>
                 <element signature="e#20#31#0" expanded="true" />
               </folding>
@@ -85,8 +82,8 @@
         <option value="$PROJECT_DIR$/test_code.py" />
         <option value="$PROJECT_DIR$/py_tcpsocket.py" />
         <option value="$PROJECT_DIR$/gym_test.py" />
-        <option value="$PROJECT_DIR$/test_python.py" />
         <option value="$PROJECT_DIR$/py_protocol.py" />
+        <option value="$PROJECT_DIR$/test_python.py" />
       </list>
     </option>
   </component>
@@ -313,7 +310,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -326,7 +323,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32561985" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3283582" />
       <window_info anchor="right" id="Remote Host" order="3" sideWeight="0.49945474" visible="true" weight="0.32995737" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13006397" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13006397" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
@@ -683,13 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="73" selection-start-line="73" selection-end-line="76" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1242">
@@ -745,10 +735,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="237" column="38" selection-start-line="237" selection-start-column="30" selection-end-line="237" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_python.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="33" />
+        <state relative-caret-position="432">
+          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
           <folding>
             <element signature="e#20#31#0" expanded="true" />
           </folding>
