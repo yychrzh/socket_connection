@@ -116,7 +116,10 @@ class Data_transfer(Number_conver, Tcpsocket):
         float_array = []
         recv_char = self.recv_bytes(recv_lens)
         # self.debug_print("recv_char", recv_char, len(recv_char))
-        recv_bys = recv_char  # self.recv_char2byte(recv_char)
+        # recv_bys = recv_char  # self.recv_char2byte(recv_char)
+        recv_bys = []
+        for i in range(len(recv_char)):
+            recv_bys.append(recv_char[i])
         self.debug_print("recv_bys", recv_bys, len(recv_bys))
 
         recv_flag = int(recv_bys[TRANS_FLAG_POSITION])
