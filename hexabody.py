@@ -7,6 +7,9 @@
 # 0 ~ 9999ms. The duration longer than 9999ms will be set as 9999ms.
 # All joint and leg positions are points in a Cartesian coordinate system.
 
+# control instruction: (double)
+#
+
 
 # hexabody
 Available = True
@@ -195,12 +198,7 @@ class hexa_leg(object):
     # The range of degree is different. The range of NO.0 joint's degree is (35 - 145).
     # The range of NO.1 joint's degree is (10 - 170). The range of NO.2 joint's degree is (10 - 160).
     def MoveJoint(self, num, degree, duration):
-        degree = degree if degree > JointDegreeRange[num][0] else JointDegreeRange[num][0]
-        degree = degree if degree < JointDegreeRange[num][1] else JointDegreeRange[num][1]
-        duration = duration if duration > Min_duration else Min_duration
-        duration = duration if duration < Max_duration else Max_duration
-        self.joint_degree[num] = degree
-        self.duration[num] = duration
+        return 0
 
     # MoveLeg moves a leg to specified position in given duration.
     def MoveLeg(self, joint_degree, duration):
@@ -284,54 +282,55 @@ class hexa_body(object):
 
     # StopMarching makes the HEXA quit the state of marching.
     def StopMarching(self):
-        return 0
+        return
 
     # WalkContinuously makes the HEXA walk continuously in given direction in degrees (0-359)
     # with given speed (0.1 cm/s - 1.2 cm/s). Call StopWalkingContinuously to stop.
     # 0 degrees is in the direction of the power button.
     # An increase in direction angle results in an anti-clockwise rotation.
     def WalkContinuously(self, direction, speed):
-        return 0
+        return
 
     # WalkingContinuously returns whether HEXA is walking continuously or not.
     def WalkingContinuously(self):
-        return 0
+        return
 
     # StopWalkingContinuously stops the HEXA from walking continuously.
     def StopWalkingContinuously(self):
-        return 0
+        return
 
     # Walk makes the HEXA walk one frame in given direction in degrees (0-359) with given duration.
     # Calling this function in a loop would give the same effect as calling WalkContinuously.
     # 0 degrees is in the direction of the power button. An increase in direction angle results in
     # an anti-clockwise rotation.
     def Walk(self, direction, duration):
-        return 0
+        return
 
 
+# hexa's top instructions
 class hexa(object):
     def __init__(self):
         pass
 
     # Available returns whether driver is available or not.
     def Available(self):
-        return 0
+        return
 
     # Start starts the hexabody driver.
     def Start(self):
-        return 0
+        return
 
     # RotationDirection returns the direction of rotation, 1 means clockwise, -1 means anticlockwise.
     def RotationDirection(self):
-        return 0
+        return
 
     # Releax reduces power to all servos on HEXA to save battery.
     def Relax(self):
-        return 0
+        return
 
     # Close shuts down the hexabody driver.
     def Close(self):
-        return 0
+        return
 
 
 if __name__ == "__main__":

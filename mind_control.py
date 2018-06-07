@@ -9,6 +9,7 @@ DATA_FLAG                = 2
 EPISODE_START_FLAG       = 3
 EPISODE_END_FLAG         = 4
 TERMINATION_FLAG         = 5
+CONTROL_FLAG             = 6
 
 robot_ip = '192.168.123.111'  # '10.20.4.113'
 hexa_port_num = 4096
@@ -26,7 +27,14 @@ def remote_control(conn):
         print("connect with client success !")
 
     while True:
-        conn.send_data()
+        # send data or control instructions to robot
+        conn.send_data([1, 2, 3], 64, 'control')
+
+        recv_flag, recv_array = conn.recv_data()
+        print(recv_flag, recv_array)
+        conn.send_flag(TERMINATION_FLAG)
+        conn.close_socket()
+        break
 
 
 if __name__ == "__main__":

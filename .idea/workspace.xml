@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/hexabody.py" beforeDir="false" afterPath="$PROJECT_DIR$/hexabody.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux_protocol.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/linux_protocol.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux_protocol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mind_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/mind_control.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_protocol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_tcpsocket.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_tcpsocket.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_python.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,11 +32,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mind_control.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="number_conversion.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/number_conversion.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="759">
+              <caret line="262" column="18" selection-start-line="262" selection-start-column="15" selection-end-line="262" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mind_control.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mind_control.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="28" column="22" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+            <state relative-caret-position="540">
+              <caret line="30" column="48" lean-forward="true" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
               <folding>
                 <element signature="e#20#31#0" expanded="true" />
               </folding>
@@ -51,19 +56,40 @@
       <file leaf-file-name="hexabody.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hexabody.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5832">
-              <caret line="324" column="32" lean-forward="true" selection-start-line="324" selection-start-column="32" selection-end-line="324" selection-end-column="32" />
+            <state relative-caret-position="4860">
+              <caret line="270" column="21" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="py_protocol.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="py_protocol.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/py_protocol.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2268">
-              <caret line="126" column="62" selection-start-line="126" selection-start-column="62" selection-end-line="126" selection-end-column="62" />
+            <state relative-caret-position="486">
+              <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="109" selection-end-column="49" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_code.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_code.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="108" column="12" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="connect.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/connect.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="180" column="44" selection-start-line="180" selection-start-column="36" selection-end-line="180" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,8 +98,8 @@
       <file leaf-file-name="py_tcpsocket.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/py_tcpsocket.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
+            <state relative-caret-position="435">
+              <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -102,14 +128,14 @@
         <option value="$PROJECT_DIR$/number_conversion.py" />
         <option value="$PROJECT_DIR$/gym_test.py" />
         <option value="$PROJECT_DIR$/const.py" />
-        <option value="$PROJECT_DIR$/test_code.py" />
-        <option value="$PROJECT_DIR$/hexabody.py" />
         <option value="$PROJECT_DIR$/test_python.py" />
         <option value="$PROJECT_DIR$/py_tcpsocket.py" />
-        <option value="$PROJECT_DIR$/py_protocol.py" />
         <option value="$PROJECT_DIR$/linux_protocol.h" />
         <option value="$PROJECT_DIR$/linux_protocol.cpp" />
+        <option value="$PROJECT_DIR$/hexabody.py" />
         <option value="$PROJECT_DIR$/mind_control.py" />
+        <option value="$PROJECT_DIR$/test_code.py" />
+        <option value="$PROJECT_DIR$/py_protocol.py" />
       </list>
     </option>
   </component>
@@ -337,7 +363,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -407,16 +432,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test_python.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#20#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/py_protocol.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -659,16 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/connect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3870">
-          <caret line="218" column="4" selection-start-line="218" selection-start-column="4" selection-end-line="226" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gym_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -683,13 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/number_conversion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="329" column="23" selection-start-line="329" selection-start-column="23" selection-end-line="329" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_exchange.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1643" />
@@ -699,27 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/py_tcpsocket.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hexabody.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5832">
-          <caret line="324" column="32" lean-forward="true" selection-start-line="324" selection-start-column="32" selection-end-line="324" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -737,16 +714,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_protocol.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2268">
-          <caret line="126" column="62" selection-start-line="126" selection-start-column="62" selection-end-line="126" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_python.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
@@ -759,10 +726,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mind_control.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" column="22" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+        <state relative-caret-position="540">
+          <caret line="30" column="48" lean-forward="true" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
           <folding>
             <element signature="e#20#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hexabody.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4860">
+          <caret line="270" column="21" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="180" column="44" selection-start-line="180" selection-start-column="36" selection-end-line="180" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="108" column="12" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/number_conversion.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10908">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_tcpsocket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/number_conversion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="262" column="18" selection-start-line="262" selection-start-column="15" selection-end-line="262" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_protocol.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="109" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

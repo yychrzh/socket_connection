@@ -45,6 +45,9 @@ class A():
     def __init__(self, info):
         print("A", info)
 
+    def func(self):
+        print("A.func")
+
     def func1(self):
         print("A.1")
 
@@ -53,6 +56,9 @@ class B():
     def __init__(self, info):
         print("B", info)
 
+    def func(self):
+        print("B.func")
+
     def func2(self):
         print("B.2")
 
@@ -60,8 +66,11 @@ class B():
 class C(A, B):
     def __init__(self, info):
         print(info)
-        A.__init__(self, info)
         B.__init__(self, info)
+        A.__init__(self, info)
+
+    def func(self):
+        print("C.func")
 
     def func3(self):
         self.func1()
@@ -81,13 +90,32 @@ def test_byte_char():
     print(c)
 
 
-def test_const():
-    import const
-    const.PI = 3.14
-    const.A_R = 0
-    const.Rl = 0
-    print(const.PI, const.A_R)
-    print(const.Rl)
+def test_string():
+    a = 'ABC'
+    b = a.encode("utf-8")
+    print(b)
+    str_a = b.decode("ascii")
+    print(str_a, type(str_a))
+    str_a = 123
+    c = bytes("%s" % str_a, encoding="ascii")
+    print(c)
+
+
+def test_ascii():
+    a = "ab_c"
+    b = [ord(a[i]) for i in range(len(a))]
+    print(b)
+    by = bytes(b)
+    print(by)
+    c = ""
+    for i in range(len(b)):
+        c += chr(b[i])
+    print(c)
+
+
+def test_func_name():
+    a = C("init")
+    getattr(a, 'func1')()
 
 
 if __name__ == "__main__":
@@ -95,4 +123,9 @@ if __name__ == "__main__":
     # oc.func3()
     # test_byte_char()
     # test_bytes()
-    test_const()
+    # c = C("init")
+    # c.func()
+    # c.A.func()
+    # test_string()
+    # test_func_name()
+    test_ascii()
