@@ -237,12 +237,12 @@ class hexa_body(object):
         pass
 
     # Lift raises or reduces the height of HEXA's body in given height (-20 mm - 50 mm).
-    def Lift(self):
+    def Lift(self, height):
         return 0
 
     # Pitch makes the body pitch at specified degree of angle in given duration.
     # The HEXA will pitch along the X axis of body coordinate.
-    def Pitch(self):
+    def Pitch(self, degree, duration):
         return 0
 
     # StopPitching stops an ongoing pitch.

@@ -67,12 +67,12 @@ class Tcpsocket(object):
             recv_b = self.conn.recv(self.BUFFSIZE)
         else:
             recv_b = self.conn.recv(recv_lens)
-        if recv_b is b'':
-            self.t_debug_print("the connection might have broken !")
+        if recv_b == b'':
+            print("the connection might have broken !")
         return recv_b
 
     def close_socket(self):
         if self.conn_type == 'client':
-            self.t_debug_print("shutdown and close socket connection !")
+            print("shutdown and close socket connection !")
             self.conn.shutdown(2)
             self.conn.close()

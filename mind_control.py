@@ -1,7 +1,6 @@
 #-*-coding:utf-8-*-
 import time
-import random
-from py_protocol import Data_transfer
+from remote_robot import remote_hexa
 
 # send data flag: 0~127
 CONNECTION_FLAG          = 1
@@ -10,7 +9,8 @@ EPISODE_START_FLAG       = 3
 EPISODE_END_FLAG         = 4
 TERMINATION_FLAG         = 5
 CONTROL_FLAG             = 6
-RESPONSE_FLAG            = 7
+SUCCESS_RESPONSE_FLAG    = 7
+ERROR_RESPONSE_FLAG      = 8
 
 # data type: float, double
 DATA_FLOAT32             = 32
@@ -62,13 +62,71 @@ def remote_test(conn):
             break
 
 
-def remote_control(conn):
+def remote_control1(hexa):
+    hexabody_driver = hexa.Available()
+    print("Is hexabody's driver available ? ", hexabody_driver)
+
+    hexabody_start = hexa.Start()
+    print("Is hexabody start ? ", hexabody_start)
+
+    # hexabody_r_dir = hexa.RotationDirection()
+    # print("hexabody's RotationDirection: %d" % hexabody_r_dir)
+
+    hexabody_relax = hexa.Relax()
+    print("Is hexabody Relax ? ", hexabody_relax)
+
+    hexabody_close = hexa.Close()
+    print("Is hexabody Close ? ", hexabody_close)
+
+    hexabody_driver = hexa.Available()
+    print("Is hexabody's driver available ? ", hexabody_driver)
+
+    hexa.terminate()
+    return
+
+
+def remote_control(hexa):
+    hexabody_driver = hexa.Available()
+    print("Is hexabody's driver available ? ", hexabody_driver)
+
+    hexabody_start = hexa.Start()
+    print("Is hexabody start ? ", hexabody_start)
+
+    # test
+    hexa.Stand()
+    time.sleep(1)
+    hexa.Lift(-10)
+    time.sleep(1)
+    hexa.Lift(30)
+    time.sleep(1)
+    hexa.Stand()
+    time.sleep(1)
+    hexa.Pitch(10, 100)
+    time.sleep(1)
+    hexa.StopPitch()
+    time.sleep(1)
+    hexa.Spin(60, 100)
+    time.sleep(1)
+    hexa.Stand()
+
+    hexabody_relax = hexa.Relax()
+    print("Is hexabody Relax ? ", hexabody_relax)
+
+    hexabody_close = hexa.Close()
+    print("Is hexabody Close ? ", hexabody_close)
+
+    hexabody_driver = hexa.Available()
+    print("Is hexabody's driver available ? ", hexabody_driver)
+
+    hexa.terminate()
     return
 
 
 if __name__ == "__main__":
     print("create socket server, waiting to connect to hexa robot...")
-    conn = Data_transfer('server', hexa_port_num, buffsize=2048, debug_print=False)
-    remote_control(conn)
+    # conn = Data_transfer('server', hexa_port_num, buffsize=2048, debug_print=False)
+    hexa = remote_hexa('server', hexa_port_num, buffsize=2048, debug_print=False)
+    hexa.handshake()
+    remote_control(hexa)
 
 

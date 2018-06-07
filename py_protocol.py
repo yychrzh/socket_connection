@@ -33,7 +33,8 @@ EPISODE_START_FLAG       = 3
 EPISODE_END_FLAG         = 4
 TERMINATION_FLAG         = 5
 CONTROL_FLAG             = 6
-RESPONSE_FLAG            = 7
+SUCCESS_RESPONSE_FLAG    = 7
+ERROR_RESPONSE_FLAG      = 8
 
 EVEN_FLAG                = 0
 ODD_FLAG                 = 1
@@ -174,8 +175,6 @@ class Data_transfer(Number_conver, Tcpsocket):
     def recv_data(self, recv_lens=0):
         float_array = []
         recv_char = self.recv_bytes(recv_lens)
-        # self.debug_print("recv_char", recv_char, len(recv_char))
-        # recv_bys = recv_char  # self.recv_char2byte(recv_char)
         recv_bys = []
         for i in range(len(recv_char)):
             recv_bys.append(recv_char[i])
