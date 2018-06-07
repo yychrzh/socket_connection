@@ -11,7 +11,7 @@ DATA_LEN_FLAG_LENGTH     = 2                                 # max data lens: 65
 
 FLAG_LENGTH              = TRANS_FLAG_LENGTH + DATA_TYPE_LENGTH + PARITY_LENGTH + DATA_LEN_FLAG_LENGTH   # 5
 
-TRANS_FLAG_POSITION      = 0                                 # 0, the index in send data char array
+TRANS_FLAG_POSITION      = 0                                           # 0, the index in send data char array
 DATA_TYPE_POSITION       = TRANS_FLAG_POSITION + TRANS_FLAG_LENGTH     # 1, the index in send data char array
 PARITY_POSITION          = DATA_TYPE_POSITION + DATA_TYPE_LENGTH       # 2, the index in send data char array
 DATA_LEN_POSITION        = PARITY_POSITION + PARITY_LENGTH             # 3
