@@ -30,7 +30,8 @@ class Tcpsocket(object):
         server.bind(('', self.port_num))
         server.listen(5)
         conn, address = server.accept()
-        self.t_debug_print("accept from client " + str(address) + " success !")
+        # self.t_debug_print("accept from client " + str(address) + " success !")
+        print("accept from client " + str(address) + " success !")
         return conn
 
     # create the socket client connection
@@ -38,7 +39,8 @@ class Tcpsocket(object):
         addr = (self.host, self.port_num)
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         conn.connect(addr)
-        self.t_debug_print("connect with server " + self.host + ":" + str(self.port_num) + " success !")
+        # self.t_debug_print("connect with server " + self.host + ":" + str(self.port_num) + " success !")
+        print("connect with server " + self.host + ":" + str(self.port_num) + " success !")
         return conn
 
     # send data with the format of strings

@@ -27,6 +27,7 @@ DATA_FLAG                = 2
 EPISODE_START_FLAG       = 3
 EPISODE_END_FLAG         = 4
 TERMINATION_FLAG         = 5
+CONTROL_FLAG             = 6
 
 EVEN_FLAG                = 0
 ODD_FLAG                 = 1
@@ -123,7 +124,7 @@ class Data_transfer(Number_conver, Tcpsocket):
         self.debug_print("recv_bys", recv_bys, len(recv_bys))
 
         recv_flag = int(recv_bys[TRANS_FLAG_POSITION])
-        if DATA_FLAG == recv_flag:
+        if DATA_FLAG == recv_flag or CONTROL_FLAG == recv_flag:
             data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
             data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
             all_lens = 5 + data_length * int(data_type / 8)

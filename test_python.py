@@ -73,7 +73,7 @@ def float_test(conn):
 
 
 def agent_test():
-    conn = Data_transfer('client', 5096, 2048, '127.0.0.1', debug_print=False)
+    conn = Data_transfer('client', 5096, 2048, '10.20.4.35', debug_print=False)
 
     # recv connect flag:
     print("send connection flag...")
@@ -88,7 +88,7 @@ def agent_test():
     else:
         print("start success !")
 
-    MAX_COUNT = 100
+    MAX_COUNT = 10
     count = 0
     error_count = 0
     total_lens = 0
@@ -132,8 +132,8 @@ def agent_test():
 
 
 if __name__ == "__main__":
-    agent_test()
-    """
+    # agent_test()
+
     port_num = 8088
     socket_type = 'server'
     print("please input socket port num(default: 8088, >2048):")
@@ -155,4 +155,4 @@ if __name__ == "__main__":
         conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, host=recv_str, debug_print=False)
     else:
         print("socket type input error !")
-    """
+

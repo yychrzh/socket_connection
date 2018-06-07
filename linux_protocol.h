@@ -31,6 +31,7 @@
 #define EPISODE_START_FLAG       3
 #define EPISODE_END_FLAG         4
 #define TERMINATION_FLAG         5
+#define CONTROL_FLAG             6
 
 #define EVEN_FLAG                0
 #define ODD_FLAG                 1

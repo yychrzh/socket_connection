@@ -314,7 +314,7 @@ void Data_transfer::recv_data(unsigned char *recv_flag, unsigned char *data_type
 	}
 	// get recv flag:
 	*recv_flag = char2byte(recv_char[TRANS_FLAG_POSITION]);
-	if (*recv_flag != DATA_FLAG){
+	if ((*recv_flag != DATA_FLAG) && (*recv_flag != CONTROL_FLAG)){
 		return;
 	}
 	// get data_type and data_length:
@@ -379,7 +379,7 @@ void Data_transfer::recv_data_byte(unsigned char *recv_flag, unsigned char *data
 	}
 	// get recv flag:
 	*recv_flag = recv_byte[TRANS_FLAG_POSITION];
-	if (*recv_flag != DATA_FLAG){
+	if ((*recv_flag != DATA_FLAG) && (*recv_flag != CONTROL_FLAG)){
 		return;
 	}
 	// get data_type and data_length:

@@ -81,14 +81,18 @@ def test_byte_char():
     print(c)
 
 
-def test_bytes():
-    a = bytes([5])
-    b = 3
-    print(a[0] > 2)
+def test_const():
+    import const
+    const.PI = 3.14
+    const.A_R = 0
+    const.Rl = 0
+    print(const.PI, const.A_R)
+    print(const.Rl)
 
 
 if __name__ == "__main__":
     # oc = C('fork')
     # oc.func3()
     # test_byte_char()
-    test_bytes()
+    # test_bytes()
+    test_const()
