@@ -33,6 +33,7 @@ EPISODE_START_FLAG       = 3
 EPISODE_END_FLAG         = 4
 TERMINATION_FLAG         = 5
 CONTROL_FLAG             = 6
+RESPONSE_FLAG            = 7
 
 EVEN_FLAG                = 0
 ODD_FLAG                 = 1
@@ -106,30 +107,38 @@ class Data_transfer(Number_conver, Tcpsocket):
         return send_bys
 
     # trans control instructions to the format of send byte
-    # data format: 0: send_flag(control flag); 1: func_name length; 2: parameters nums;
+    # data format: 0: send_flag(control flag); 1: func_name length; 2: parameters nums; 3: data length
     # func_name, [param data type, param_data]...
+    # data_lens: len(func_name) + parameters nums + parameters bytes
     def instruc2send_byte(self, func_name, params_list):
         func_name_lens = len(func_name)
         param_lens = len(params_list)
         int_func_name = [ord(func_name[i]) for i in range(func_name_lens)]
-
+        self.debug_print("func_name", int_func_name, func_name_lens)
+        data_lens = func_name_lens + param_lens
+        for i in range(param_lens):
+            data_lens += int(params_list[i][0] / 8)
         send_bys = []
-        # add send_flag:
+
+        # 0. add send_flag:
         send_bys.append(CONTROL_FLAG)
-        # add func_name lengths:
+        # 1. add func_name lengths:
         send_bys.append(func_name_lens)
-        # add parameters nums:
+        # 2. add parameters nums:
         send_bys.append(param_lens)
+        # 3. add data_lens:
+        send_bys.append(data_lens)
         # add func_name:
         for i in range(func_name_lens):
             send_bys.append(int_func_name[i])
+
         # add params_list:
-        for i in range(len(params_list)):
+        for i in range(param_lens):
+            data_type = params_list[i][0]  # float or double
+            parameters = params_list[i][1]
             # add parameter data type:
             send_bys.append(params_list[i][0])
-            send_bys.append(params_list[i][1])
-            data_type = params_list[i][0]     # float or double
-            parameters = params_list[i][1]
+            # add parameter data:
             param_bys = self.float2byte(parameters, data_type)
             for i in range(len(param_bys)):
                 send_bys.append(param_bys[i])
