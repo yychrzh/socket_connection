@@ -26,7 +26,7 @@ hexa_port_num = 4096
 
 
 # control with remote python:
-def remote_control(conn):
+def remote_test(conn):
     # recv connect flag:
     print("waiting for connection flag...")
     recv_flag, _ = conn.recv_data()
@@ -60,6 +60,10 @@ def remote_control(conn):
             conn.send_flag(TERMINATION_FLAG)
             conn.close_socket()
             break
+
+
+def remote_control(conn):
+    return
 
 
 if __name__ == "__main__":
