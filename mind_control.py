@@ -1,6 +1,7 @@
 #-*-coding:utf-8-*-
 import time
-from remote_robot import remote_hexa
+from py_protocol import Data_transfer
+from remote_robot import Hexa, HexaBody, HexaHead, HexaLeg
 
 # send data flag: 0~127
 CONNECTION_FLAG          = 1
@@ -49,7 +50,8 @@ def remote_test(conn):
         # send one control instructions to robot
         # conn.send_data([1, 2, 3], 64, 'control')
         print("send one control instruction to robot !")
-        # conn.send_control_instruction("start", [[DATA_FLOAT64, 1.90], [DATA_FLOAT32, -0.123], [DATA_FLOAT64, 1112]])
+        # conn.send_control_instruction("start", [[DATA_FLOAT64, 1.90],
+        # [DATA_FLOAT32, -0.123], [DATA_FLOAT64, 1112]])
         conn.send_control_instruction(func_name_list[count], param_list[count])
 
         print("send success, waiting for response !")
@@ -85,48 +87,55 @@ def remote_control1(hexa):
     return
 
 
-def remote_control(hexa):
-    hexabody_driver = hexa.Available()
+def remote_control2(conn, hexabody):
+    hexabody_driver = hexabody.Available()
     print("Is hexabody's driver available ? ", hexabody_driver)
 
-    hexabody_start = hexa.Start()
+    hexabody_start = hexabody.Start()
     print("Is hexabody start ? ", hexabody_start)
 
     # test
-    hexa.Stand()
+    hexabody.Stand()
     time.sleep(1)
-    hexa.Lift(-10)
+    hexabody.Lift(-10)
     time.sleep(1)
-    hexa.Lift(30)
+    hexabody.Lift(30)
     time.sleep(1)
-    hexa.Stand()
+    hexabody.Stand()
     time.sleep(1)
-    hexa.Pitch(10, 100)
+    hexabody.Pitch(10, 100)
     time.sleep(1)
-    hexa.StopPitch()
+    hexabody.StopPitch()
     time.sleep(1)
-    hexa.Spin(60, 100)
+    hexabody.Spin(60, 100)
     time.sleep(1)
-    hexa.Stand()
+    hexabody.Stand()
 
-    hexabody_relax = hexa.Relax()
+    hexabody_relax = hexabody.Relax()
     print("Is hexabody Relax ? ", hexabody_relax)
 
-    hexabody_close = hexa.Close()
+    hexabody_close = hexabody.Close()
     print("Is hexabody Close ? ", hexabody_close)
 
-    hexabody_driver = hexa.Available()
+    hexabody_driver = hexabody.Available()
     print("Is hexabody's driver available ? ", hexabody_driver)
 
-    hexa.terminate()
+    conn.terminate()
     return
+
+
+def remote_control(conn):
+    hexa = Hexa(conn)
+    hexabody = HexaBody(conn)
+    hexahead = HexaHead(conn)
+    hexaleg = HexaLeg(conn)
 
 
 if __name__ == "__main__":
     print("create socket server, waiting to connect to hexa robot...")
-    # conn = Data_transfer('server', hexa_port_num, buffsize=2048, debug_print=False)
-    hexa = remote_hexa('server', hexa_port_num, buffsize=2048, debug_print=False)
-    hexa.handshake()
-    remote_control(hexa)
+    conn = Data_transfer('server', hexa_port_num, buffsize=2048,
+                         debug_print=False)
+    conn.handshake()
+    remote_control(conn)
 
 

@@ -72,7 +72,8 @@ class Data_transfer(Number_conver, Tcpsocket):
         return output_data
 
     # trans float data list to the format of send byte
-    # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;4: data_length low;5~: byte data
+    # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;
+    # 4: data_length low;5~: byte data
     def float2send_byte(self, float_data, bit=32, send_type='data'):
         if bit != 32 and bit != 64:
             raise Exception("float bit choose error !")
@@ -107,11 +108,13 @@ class Data_transfer(Number_conver, Tcpsocket):
             send_bys.append(data_bys[i])
         return send_bys
 
+    """
     # trans control instructions to the format of send byte
-    # data format: 0: send_flag(control flag); 1: func_name length; 2: parameters nums; 3: data length
+    # data format: 0: send_flag(control flag); 1: func_name length; 
+    # 2: parameters nums; 3: data length
     # func_name, [param data type, param_data]...
     # data_lens: len(func_name) + parameters nums + parameters bytes
-    def instruc2send_byte(self, func_name, params_list):
+    def instruc2send_byte1(self, func_name, params_list):
         func_name_lens = len(func_name)
         param_lens = len(params_list)
         int_func_name = [ord(func_name[i]) for i in range(func_name_lens)]
@@ -129,6 +132,55 @@ class Data_transfer(Number_conver, Tcpsocket):
         send_bys.append(param_lens)
         # 3. add data_lens:
         send_bys.append(data_lens)
+        # add func_name:
+        for i in range(func_name_lens):
+            send_bys.append(int_func_name[i])
+
+        # add params_list:
+        for i in range(param_lens):
+            data_type = params_list[i][0]  # float or double
+            parameters = params_list[i][1]
+            # add parameter data type:
+            send_bys.append(params_list[i][0])
+            # add parameter data:
+            param_bys = self.float2byte(parameters, data_type)
+            for i in range(len(param_bys)):
+                send_bys.append(param_bys[i])
+        return send_bys
+    """
+
+    # trans control instructions to the format of send byte
+    # data format: 0: send_flag(control flag); 1: module_name length; 2: func_name length;
+    # 3: parameters nums; 4: data length
+    # module name, func_name, [param data type, param_data]...
+    # data_lens: len(module_name) + len(func_name) + parameters nums + parameters bytes
+    def instruc2send_byte(self, module_name, func_name, params_list):
+        module_name_lens = len(module_name)
+        func_name_lens = len(func_name)
+        param_lens = len(params_list)
+
+        int_module_name = [ord(module_name[i]) for i in range(module_name_lens)]
+        int_func_name = [ord(func_name[i]) for i in range(func_name_lens)]
+        self.debug_print("module_name", int_module_name, module_name_lens)
+        self.debug_print("func_name", int_func_name, func_name_lens)
+        data_lens = module_name_lens + func_name_lens + param_lens
+        for i in range(param_lens):
+            data_lens += int(params_list[i][0] / 8)
+        send_bys = []
+
+        # 0. add send_flag:
+        send_bys.append(CONTROL_FLAG)
+        # 1. add module_name lengths:
+        send_bys.append(module_name_lens)
+        # 2. add func_name lengths:
+        send_bys.append(func_name_lens)
+        # 3. add parameters nums:
+        send_bys.append(param_lens)
+        # 4. add data_lens:
+        send_bys.append(data_lens)
+        # add module_name:
+        for i in range(module_name_lens):
+            send_bys.append(int_module_name[i])
         # add func_name:
         for i in range(func_name_lens):
             send_bys.append(int_func_name[i])
@@ -167,8 +219,8 @@ class Data_transfer(Number_conver, Tcpsocket):
         self.send_bytes(send_bys)
 
     # func_name: strings, params_list: [[data_type, data]... ]
-    def send_control_instruction(self, func_name, params_list):
-        send_bys = bytes(self.instruc2send_byte(func_name, params_list))
+    def send_control_instruction(self, module_name, func_name, params_list):
+        send_bys = bytes(self.instruc2send_byte(module_name, func_name, params_list))
         self.debug_print("send_bys", send_bys, len(send_bys))
         self.send_bytes(send_bys)
 
@@ -196,3 +248,21 @@ class Data_transfer(Number_conver, Tcpsocket):
                 rest_lens -= len(temp_bys)
             float_array, _ = self.recv_byte2float(recv_bys)
         return recv_flag, float_array
+
+    def terminate(self):
+        print("send termination flag to hexa !")
+        self.conn.send_flag(TERMINATION_FLAG)
+        self.conn.close_socket()
+
+    def handshake(self):
+        if self.conn.conn_type == 'server':
+            print("waiting for connection flag...")
+            recv_flag, _ = self.conn.recv_data()
+            if CONNECTION_FLAG != recv_flag:
+                print("connect with client error !")
+                return
+            else:
+                print("connect with client success !")
+        elif self.conn.conn_type == 'client':
+            print("send connection flag...")
+            self.conn.send_flag(CONNECTION_FLAG)

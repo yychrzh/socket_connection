@@ -27,7 +27,8 @@ MaxDirection = 359
 # legs
 LegNumber = [0, 1, 2, 3, 4, 5]
 JointNumber = [0, 1, 2]
-# JointDegreeRange = [[35, 145], [10, 170], [10, 160]]
+LegLength = [59, 47, 88]
+JointDegreeRanges = [[35, 145], [10, 170], [10, 160]]
 
 # GaitType
 GaitOriginal = 0   # default gait
@@ -318,10 +319,6 @@ class hexa(object):
 
     # Start starts the hexabody driver.
     def Start(self):
-        return
-
-    # RotationDirection returns the direction of rotation, 1 means clockwise, -1 means anticlockwise.
-    def RotationDirection(self):
         return
 
     # Releax reduces power to all servos on HEXA to save battery.
