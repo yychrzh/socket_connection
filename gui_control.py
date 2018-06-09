@@ -104,15 +104,6 @@ class Application(tk.Tk):
         self.destroy()  # destroy all widgets
 
 
-def main():
-    root = Tkinter.Tk()
-    root.columnconfigure(0, weight=1)
-    root.rowconfigure(0, weight=1)
-    root.geometry('640x360')  # 设置了主窗口的初始大小960x540 800x450 640x360
-
-    main_frame = MainFrame(root)
-    main_frame.mainloop()
-
 import time
 from py_protocol import Data_transfer
 from remote_robot import Hexa, HexaBody, HexaHead, HexaLeg
