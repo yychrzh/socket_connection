@@ -1,5 +1,5 @@
 # socket_connection
-use socket model to transfer data between python with python or c++ and python 
+use socket model to transfer data between python and c++ 
 
 the client.h and client.c are used for c++
 the connect.py are used for python3
