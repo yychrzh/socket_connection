@@ -3,7 +3,6 @@ from py_tcpsocket import Tcpsocket
 
 
 # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;4: data_length low;5~: byte data
-
 TRANS_FLAG_LENGTH        = 1                                 # send data flag: 1bits
 DATA_TYPE_LENGTH         = 1                                 # data type: float or double
 PARITY_LENGTH            = 1                                 # parity check of data: 1bits: 0 or 1
@@ -16,6 +15,7 @@ DATA_TYPE_POSITION       = TRANS_FLAG_POSITION + TRANS_FLAG_LENGTH     # 1, the 
 PARITY_POSITION          = DATA_TYPE_POSITION + DATA_TYPE_LENGTH       # 2, the index in send data char array
 DATA_LEN_POSITION        = PARITY_POSITION + PARITY_LENGTH             # 3
 DATA_POSITION            = DATA_LEN_POSITION + DATA_LEN_FLAG_LENGTH    # 5
+
 
 # data type: float, double
 DATA_FLOAT32             = 32
@@ -251,18 +251,18 @@ class Data_transfer(Number_conver, Tcpsocket):
 
     def terminate(self):
         print("send termination flag to hexa !")
-        self.conn.send_flag(TERMINATION_FLAG)
-        self.conn.close_socket()
+        self.send_flag(TERMINATION_FLAG)
+        self.close_socket()
 
     def handshake(self):
-        if self.conn.conn_type == 'server':
+        if self.conn_type == 'server':
             print("waiting for connection flag...")
-            recv_flag, _ = self.conn.recv_data()
+            recv_flag, _ = self.recv_data()
             if CONNECTION_FLAG != recv_flag:
                 print("connect with client error !")
                 return
             else:
                 print("connect with client success !")
-        elif self.conn.conn_type == 'client':
+        elif self.conn_type == 'client':
             print("send connection flag...")
-            self.conn.send_flag(CONNECTION_FLAG)
+            self.send_flag(CONNECTION_FLAG)

@@ -81,7 +81,7 @@ class Distance():
         ret = 1 if self.func_execute("Close") == SUCCESS_RESPONSE_FLAG else 0
         return ret
 
-    # Value returns the filtered distance value within the range of 100~1500mm
+    # Value returns the filtered distance value within the range of 100~1500mm.
     def Value(self):
         ret = self.func_execute("Value")[0]
         return ret
@@ -108,16 +108,12 @@ class Infrared():
         ret = 1 if self.func_execute("Close") == SUCCESS_RESPONSE_FLAG else 0
         return ret
 
-    # Value returns the filtered distance value within the range of 100~1500mm
-    def Value(self):
-        ret = self.func_execute("Value")[0]
-        return ret
-
     # LightOn starts the emitting of infrared light without modulated information.
     def LightOn(self):
         ret = 1 if self.func_execute("LightOn") == SUCCESS_RESPONSE_FLAG else 0
         return ret
 
+    # LightOff turns off the light.
     def LightOff(self):
         ret = 1 if self.func_execute("LightOff") == SUCCESS_RESPONSE_FLAG else 0
         return ret
@@ -131,7 +127,8 @@ class Infrared():
     # sequence := []int{2416, 582, 1204, 585, 609, 580, 1752, 33, 608, 577, 1574}
     # infrared.SendInfraredSequence(sequence)
     # infrared.Close()
-    def SendInfraredSequence(self, sequence):
+    def SendInfraredSequence(self, params):
+        sequence = params
         param_list = [[DATA_FLOAT64, sequence[i]] for i in range(len(sequence))]
         ret = 1 if self.func_execute("SendInfraredSequence",
                                      param_list) == SUCCESS_RESPONSE_FLAG else 0

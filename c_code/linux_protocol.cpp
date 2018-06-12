@@ -184,6 +184,7 @@ void Data_transfer::recv_byte2double(int data_lens)
 	return;	
 }
 
+/*
 // trans a float array to a send char array []: len(send_char) = data_lens + 5, data_lens < 65535 
 void Data_transfer::float2send_char(const float *data, int data_lens)
 {
@@ -297,8 +298,10 @@ void Data_transfer::recv_char2double(int data_lens)
 	}
 	return;
 }
+*/
 
-/**********************************send recv**************************************/
+/**********************************send recv char**************************************/
+/*
 // recv all data
 void Data_transfer::recv_data(unsigned char *recv_flag, unsigned char *data_type, int *data_lens)
 {
@@ -363,50 +366,138 @@ void Data_transfer::send_flag(unsigned char flag)
 	Number_conver::debug_print("send_flag", &flag_char, 1);
 	send_strings(&flag_char, 1);
 }
+*/
 
-// recv float or double data, parameters: recv data type and data length
-void Data_transfer::recv_data_byte(unsigned char *recv_flag, unsigned char *data_type, int *data_lens)
+/**********************************send recv byte**************************************/
+// receive all data if there are data rest:
+void Data_transfer::recv_rest_data(int all_lens, int received_lens)
+{
+	int recv_data_lens = 0;
+    int rest_lens = 0;
+
+	rest_lens = all_lens - received_lens;
+    while (rest_lens){
+        recv_data_lens = recv_strings(&recv_byte[received_lens], rest_lens);
+        if (recv_data_lens <= 0){
+		    printf("receive error ! num: %d\n", recv_data_lens);
+		    return;
+	    }
+        received_lens += recv_data_lens;
+		rest_lens -= recv_data_lens;
+	}	
+}
+
+// recv data flag, parameters: recv data type and data length: processing
+void Data_transfer::recv_data_flag(unsigned char *data_type, int *data_lens, int received_lens)
 {
 	int all_lens = 0;
 	int recv_data_lens = 0;
     int rest_lens = 0;
-	int received_lens = 0;
 	
-	recv_data_lens = recv_strings(recv_byte);
-	if (recv_data_lens <= 0){
-		printf("receive error ! num: %d\n", recv_data_lens);
-		return;
-	}
-	// get recv flag:
-	*recv_flag = recv_byte[TRANS_FLAG_POSITION];
-	if ((*recv_flag != DATA_FLAG) && (*recv_flag != CONTROL_FLAG)){
-		return;
-	}
-	// get data_type and data_length:
+    // get data_type and data_length:
 	*data_type = recv_byte[DATA_TYPE_POSITION];
 	*data_lens = recv_byte[DATA_LEN_POSITION] * 256 + recv_byte[DATA_LEN_POSITION + 1];
 	all_lens = 5 + (*data_lens) * (*data_type / 8);
-	received_lens = recv_data_lens;
-	rest_lens = all_lens - received_lens;
-	while (rest_lens){
-		recv_data_lens = recv_strings(&recv_byte[received_lens], rest_lens);
-		if (recv_data_lens <= 0){
-		    printf("receive error ! num: %d\n", recv_data_lens);
-		    return;
-	    }
-		received_lens += recv_data_lens;
-		rest_lens -= recv_data_lens;
-	}
+	
+	recv_rest_data(all_lens, received_lens);
+	
 	if (DATA_FLOAT32 == (*data_type)){
 	    recv_byte2float(*data_lens);
     }
 	else if (DATA_FLOAT64 == (*data_type)){
 		recv_byte2double(*data_lens);
-	}	
+	}		
+}
+		
+// data format: 0: send_flag(control flag); 1: module_name length; 2: func_name length;
+// 3: parameters nums; 4: data length
+// flag_length: 5
+// module name, func_name, [param data type, param_data]...
+// data_lens: len(module_name) + len(func_name) + parameters nums + parameters bytes	
+void Data_transfer::recv_control_flag(int *data_lens, int received_lens)
+{
+	int all_lens = 0;
+	int recv_data_lens = 0;
+    int rest_lens = 0;
+	
+	int current_position = 0; 
+	int current_data_type = 0;
+	int float_count = 0;
+	int double_count = 0;
+	
+	// ensure all data had received 
+	*data_lens = recv_byte[4];
+	all_lens = (*data_lens) + 5;
+	
+	recv_rest_data(all_lens, received_lens);
+	
+	// get module name:
+    func_name.module_name_lens = recv_byte[1];
+    data_array_copy(func_name.module_name, &recv_byte[5], func_name.module_name_lens);
+	func_name.module_name[func_name.module_name_lens] = '\0';
+	
+    // get function name:
+    func_name.func_name_lens = recv_byte[2];
+    data_array_copy(func_name.func_name, &recv_byte[5 + func_name.module_name_lens], func_name.func_name_lens);
+	func_name.func_name[func_name.func_name_lens] = '\0';
+			
+	// get parameter list:
+	param_list.params_nums = recv_byte[3];
+	current_position = 5 + func_name.module_name_lens + func_name.func_name_lens; 
+			
+	for (int i = 0;i < param_list.params_nums;i++){
+		current_data_type = recv_byte[current_position];
+		current_position++;
+		param_list.data_type_list[i] = current_data_type;
+		switch (current_data_type) {
+			case DATA_FLOAT32:
+			    param_list.float_params[float_count] = byte2float(&recv_byte[current_position]);
+				float_count++;
+				break;
+			case DATA_FLOAT64:
+				param_list.double_params[double_count] = byte2double(&recv_byte[current_position]);
+				double_count++;
+				break;
+			default:
+			    printf("wrong data type when get parameter list !\n");
+			    break;
+		}
+		current_position += (int)(current_data_type / 8);
+	}
+			
+	param_list.float_params_nums = float_count;
+	param_list.double_params_nums = double_count;	
+}
+
+// receive data or control instructions
+void Data_transfer::recv_data(unsigned char *recv_flag, unsigned char *data_type, int *data_lens)
+{
+	int recv_data_lens = 0;
+	
+	// recv data to recv byte
+	recv_data_lens = recv_strings(recv_byte);
+	if (recv_data_lens <= 0){
+		printf("receive error ! num: %d\n", recv_data_lens);
+		return;
+	}
+	
+	// get recv flag:
+	*recv_flag = recv_byte[TRANS_FLAG_POSITION];
+
+	switch (*recv_flag) {
+		case DATA_FLAG:
+		    recv_data_flag(data_type, data_lens, recv_data_lens);
+		    break;
+		case CONTROL_FLAG:
+		    recv_control_flag(data_lens, recv_data_lens);
+		    break;
+		default:
+		    return;
+	}
 }
 
 // send float data
-void Data_transfer::send_data_byte(float *data, int data_lens)
+void Data_transfer::send_data(float *data, int data_lens)
 {
     float2send_byte(data, data_lens);
 	Number_conver::debug_print("send_byte", send_byte, data_lens * FLOAT32_BYTE + 5);
@@ -414,7 +505,7 @@ void Data_transfer::send_data_byte(float *data, int data_lens)
 }
 
 // send double data
-void Data_transfer::send_data_byte(double *data, int data_lens)
+void Data_transfer::send_data(double *data, int data_lens)
 {
 	double2send_byte(data, data_lens);
 	Number_conver::debug_print("send_byte", send_byte, data_lens * FLOAT64_BYTE + 5);
@@ -422,7 +513,7 @@ void Data_transfer::send_data_byte(double *data, int data_lens)
 }
 
 // send flag:
-void Data_transfer::send_flag_byte(unsigned char flag)
+void Data_transfer::send_flag(unsigned char flag)
 {
 	Number_conver::debug_print("send_flag", &flag, 1);
 	send_strings(&flag, 1);

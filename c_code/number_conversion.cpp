@@ -1299,7 +1299,7 @@ unsigned char Number_conver::char2byte(char x)
 }
 
 /***************************************test*************************************/
-
+/*
 void test_char_byte(Number_conver number_c);
 
 void test_dec_bin(Number_conver number_c);
@@ -1452,7 +1452,7 @@ void test_float_bin(Number_conver number_c)
 	printf("%.16f\n", d1);
 	
 	return;
-}
+}*/
 
 /* 
 int main(int argc, char *argv[])

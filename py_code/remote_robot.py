@@ -192,7 +192,7 @@ class HexaHead():
         return ret
 
     # RotateHeadContinuously makes the head rotate continuously with specified
-    #  direction and speed (1 - 360).
+    # direction and speed (1 - 360).
     def RotateHeadContinuously(self, direction, speed):
         ret = 1 if self.func_execute("RotateHeadContinuously", [[DATA_FLOAT64, direction],
                         [DATA_FLOAT64, speed]]) == SUCCESS_RESPONSE_FLAG else 0
@@ -330,17 +330,22 @@ class HexaLeg():
         return ret
 
     # moves the legs to specified JointDegrees in given duration.: len(legs) * 3 + 1
-    def MoveLegs_JointDegrees(self, legs, JointDegrees, duration):
-        leg_nums = len(legs)
+    def MoveLegs_JointDegrees(self, params):  # legs, JointDegrees, duration):
+        # leg_nums: params[0]
+        # JointDegrees: len(legs) * 3
+        # duration
+        param_list = [[DATA_FLOAT64, v] for v in params]
+        """
         param_list = [[DATA_FLOAT64, leg_nums]]
         for i in range(len(legs)):
             param_list.append([DATA_FLOAT64, legs[i]])
         for i in range(len(JointDegrees)):
             for j in range(len(JointDegrees[i])):
                 param_list.append([DATA_FLOAT64, JointDegrees[i][j]])
+        param_list.append([DATA_FLOAT64, duration])
+        """
         ret = 1 if self.func_execute("MoveLegs_JointDegrees",
                                      param_list) == SUCCESS_RESPONSE_FLAG else 0
-        param_list.append([DATA_FLOAT64, duration])
         return ret
 
     # RelaxLegs reduces servo power in all the legs to save battery
@@ -349,9 +354,10 @@ class HexaLeg():
         return ret
 
     # stops movement of specified leg.
-    def StopLeg(self, leg):
-        ret = 1 if self.func_execute("StopLeg",
-                                     [[DATA_FLOAT64, leg]]) == SUCCESS_RESPONSE_FLAG else 0
+    def StopLeg(self, params):
+        # legNumber = params[0]
+        param_list = [[DATA_FLOAT64, v] for v in params]
+        ret = 1 if self.func_execute("StopLeg", param_list) == SUCCESS_RESPONSE_FLAG else 0
         return ret
 
     # StopLegs stops movement in all legs.

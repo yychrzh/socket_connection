@@ -118,6 +118,80 @@ def test_func_name():
     getattr(a, 'func1')()
 
 
+# need be more Considerate: extract float data from a string
+def extract_float_from_str(p_str):
+    p_str_lens = len(p_str)
+    p_list = []
+    param = ""
+    # 0~9: 48~57, -: 45, .: 46
+    for i in range(len(p_str)):
+        # case: 0, eg: *0*, .0, -0., *0.999, *099
+        # remove: *0999, *0009,
+        if 48 == ord(p_str[i]):
+            if param == "":  # 0 in the first:
+                if i < (p_str_lens - 1) and ord(p_str[i + 1]) == 46:
+                    # the next of 0 is .
+                    param += p_str[i]  # add 0
+                elif i == (p_str_lens - 1):
+                    param += p_str[i]  # add 0
+            else:  # ord(param[-1]) != 48:  # last of param != 0
+                param += p_str[i]  # add 0
+        # case: 1~9:
+        elif (ord(p_str[i]) > 48) and (ord(p_str[i]) <= 57):
+            param += p_str[i]
+        # case: -, only in the first:
+        elif ord(p_str[i]) == 45:
+            if param == "":
+                param += p_str[i]
+            else:
+                if param != '.' and param != '-' and param != '-.':
+                    p_list.append(param)  # save last
+                param = ""
+                param += p_str[i]
+        # case: ., only one in data:
+        elif ord(p_str[i]) == 46 and -1 == param.find('.'):
+            param += p_str[i]
+        else:
+            if param != "" and param != '.' and param != '-' and param != '-.':
+                p_list.append(param)
+            param = ""
+    if param != "" and param != '.' and param != '-' and param != '-.':
+        p_list.append(param)
+
+    para_str = p_list
+    para_list = [float(v) for v in p_list]
+    return para_str, para_list
+
+
+def test_float_str():
+    print(extract_float_from_str("123.0 ..009800.. -.-333-.9900sss-."))
+
+
+def test_str_find():
+    a = '123.-9'
+    print(a.find('-'))
+    print(a.find('.'))
+    print(a.find('4'))
+
+
+def majorityElement(nums, l, r):
+    if l == (r - 1):
+        return nums[l]
+
+    ret = 0
+    count = 0
+    for i in range(l, r+1):
+        if 0 == count:
+            ret = nums[i]
+            count += 1
+        else:
+            if nums[i] == ret:
+                count += 1
+            else:
+                count -= 1
+    return ret
+
+
 if __name__ == "__main__":
     # oc = C('fork')
     # oc.func3()
@@ -128,4 +202,7 @@ if __name__ == "__main__":
     # c.A.func()
     # test_string()
     # test_func_name()
-    test_ascii()
+    # test_ascii()
+    # test_float_str()
+    # test_str_find()
+    print(majorityElement([1, 2, 3, 2, 3, 2, 2], 0, 6))

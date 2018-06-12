@@ -148,11 +148,13 @@ if __name__ == "__main__":
     if socket_type == 'server':
         print("create socket server, waiting for client:")
         conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, debug_print=True)
-        float_test(conn)
+        # float_test(conn)
+        conn.handshake()
     elif socket_type == 'client':
         print("create socket client, please input server ip(default: '127.0.0.1'):")
         recv_str = read_one_line_from_screen()
         conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, host=recv_str, debug_print=False)
+        conn.handshake()
     else:
         print("socket type input error !")
 
