@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="" />
+    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py_code/HexaInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/HexaInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py_code/pc_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/pc_control.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,94 +20,68 @@
     <SUITE FILE_PATH="coverage/socket_connection$number_conversion.coverage" NAME="number_conversion Coverage Results" MODIFIED="1527690590163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.44348896">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="pc_control.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/py_code/pc_control.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="43">
-                  <caret line="384" column="35" selection-start-line="384" selection-start-column="35" selection-end-line="384" selection-end-column="35" />
-                  <folding>
-                    <element signature="e#0#20#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="auxiliary.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/py_code/auxiliary.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-105">
-                  <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="rollouts.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1998">
-                  <caret line="3" column="22" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="remote_robot.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/py_code/remote_robot.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1681">
-                  <caret line="362" column="4" lean-forward="true" selection-start-line="362" selection-start-column="4" selection-end-line="362" selection-end-column="42" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="py_protocol.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/py_code/py_protocol.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="565">
-                  <caret line="258" column="46" selection-start-line="258" selection-start-column="42" selection-end-line="258" selection-end-column="46" />
-                  <folding>
-                    <element signature="e#0#43#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="py_tcpsocket.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/py_code/py_tcpsocket.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="15" column="50" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="50" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="test_python.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/py_code/test_python.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1147">
-                  <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="HexaInfo.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/py_code/HexaInfo.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="493">
-                  <caret line="188" column="95" selection-start-line="188" selection-start-column="95" selection-end-line="188" selection-end-column="95" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="pc_control.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/py_code/pc_control.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2973">
+              <caret line="384" column="35" selection-start-line="384" selection-start-column="35" selection-end-line="384" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="remote_robot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/py_code/remote_robot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1681">
+              <caret line="362" column="4" lean-forward="true" selection-start-line="362" selection-start-column="4" selection-end-line="362" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="py_protocol.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/py_code/py_protocol.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="565">
+              <caret line="258" column="46" selection-start-line="258" selection-start-column="42" selection-end-line="258" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="py_tcpsocket.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/py_code/py_tcpsocket.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="50" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_python.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/py_code/test_python.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1147">
+              <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HexaInfo.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/py_code/HexaInfo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="112" column="23" selection-start-line="112" selection-start-column="23" selection-end-line="112" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -158,8 +136,8 @@
         <option value="$USER_HOME$/Desktop/algorithm and data structure/week4_divide_and_conquer/3_improving_quicksort/improving_sorting.py" />
         <option value="$PROJECT_DIR$/py_code/auxiliary.py" />
         <option value="$PROJECT_DIR$/py_code/test_python.py" />
-        <option value="$PROJECT_DIR$/py_code/HexaInfo.py" />
         <option value="$PROJECT_DIR$/py_code/pc_control.py" />
+        <option value="$PROJECT_DIR$/py_code/HexaInfo.py" />
       </list>
     </option>
   </component>
@@ -667,13 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/auxiliary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-105">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/c_code/test_c.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3384">
@@ -705,13 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/HexaInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="188" column="95" selection-start-line="188" selection-start-column="95" selection-end-line="188" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Anaconda2/envs/py3/Lib/tkinter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -719,9 +683,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/auxiliary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4965">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/py_code/pc_control.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
+        <state relative-caret-position="2973">
           <caret line="384" column="35" selection-start-line="384" selection-start-column="35" selection-end-line="384" selection-end-column="35" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
@@ -729,10 +707,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py">
+    <entry file="file://$PROJECT_DIR$/py_code/HexaInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1998">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="22" />
+        <state relative-caret-position="450">
+          <caret line="112" column="23" selection-start-line="112" selection-start-column="23" selection-end-line="112" selection-end-column="23" />
         </state>
       </provider>
     </entry>

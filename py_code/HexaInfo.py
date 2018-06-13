@@ -15,8 +15,10 @@ GaitAmble    = 4   # 4+2 gait, 4 legs stay on the ground and 2 legs raise at the
 
 
 module_list = ["Hexa", "HexaBody", "HexaHead", "HexaLeg", "Acce", "Distance", "Infrared"]
+
+
 function_list = {
-    "Hexa": ["Available", "Start", "Relax", "Close"],
+    "Hexa": ["Available", "Start", "Relax", "Close", "RobotInfo"],
     "HexaBody": ["Lift", "Pitch", "StopPitch", "Stand", "StandWithHeight", "SelectGait",
                  "SetStepLength", "Spin", "StartMarching", "StopMarching", "WalkContinuously",
                  "WalkingContinuously", "StopWalkingContinuously", "Walk"],
@@ -30,10 +32,12 @@ function_list = {
     "Infrared": ["Available", "Start", "Close", "LightOn", "LightOff", "SendInfraredSequence"]
 }
 
+
 # param_list:
 # module_name=>function_name=>[input params name list, return nums]
 function_in_out_list = {
-    "Hexa": {"Available": [0, ["state"]], "Start": [0, 0], "Relax": [0, 0], "Close": [0, 0]},
+    "Hexa": {"Available": [0, ["state"]], "Start": [0, 0], "Relax": [0, 0], "Close": [0, 0],
+             "RobotInfo": [0, ["Battery", "Temperature", "IsCharging"]]},
 
     "HexaBody": {
                  "Lift": [["height"], 0],
@@ -105,7 +109,9 @@ function_description_list = {
     "Hexa": {"Available": "Available returns whether driver is available or not.",
              "Start": "Start starts the hexabody driver.",
              "Relax": "Releax reduces power to all servos on HEXA to save battery.",
-             "Close": "Close shuts down the hexabody driver."},
+             "Close": "Close shuts down the hexabody driver.",
+             "RobotInfo": "Robotinfo calls the robot to return the infomation of " +
+                          "Battery(0~1), Temperature(centigrade) and IsCharging"},
 
     "HexaBody": {
                  "Lift": "Lift raises or reduces the height of HEXA's body in given " +

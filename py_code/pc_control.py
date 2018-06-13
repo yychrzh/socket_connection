@@ -409,30 +409,39 @@ def remote_run(conn, module_name, func_name, params):
 # running in a independent threading:
 def remote_conn(pc_tk):
     conn = None
+    lock = th.Lock()
     while True:
         # time.sleep(0.05)
         # ready to connect with robot:
         if pc_tk.connect_flag == 1:
             pc_tk.connect_flag = 0
             print("create socket server, waiting to connect to hexa robot...")
-            # pc_tk.o_text.insert(tk.INSERT, "\ncreate socket connection, "
-            #                               "waiting to connect to hexa robot...")
+            lock.acquire()
+            pc_tk.o_text.insert(tk.INSERT, "\ncreate socket connection, "
+                                           "waiting to connect to hexa robot...")
+            lock.release()
             conn = Data_transfer(pc_tk.conn_type, pc_tk.port_num,
                                  pc_tk.buffsize, pc_tk.ip, pc_tk.debug_print)
             conn.handshake()
-            # pc_tk.o_text.insert(tk.INSERT, "\nconnect with robot success !")
+            lock.acquire()
+            pc_tk.o_text.insert(tk.INSERT, "\nconnect with robot success !")
+            lock.release()
         # send one control instruction to robot:
         elif pc_tk.connect_flag == 2:
             pc_tk.connect_flag = 0
             # remote run:
-            ret = remote_run(conn, pc_tk.module_name,
-                             pc_tk.func_name, pc_tk.params_list)
-            pc_tk.ret = ret
-            # pc_tk.ret_display(ret)
+            if conn is not None:
+                ret = remote_run(conn, pc_tk.module_name,
+                                 pc_tk.func_name, pc_tk.params_list)
+                lock.acquire()
+                pc_tk.ret = ret
+                pc_tk.ret_display(ret)
+                lock.release()
         # close and return:
         elif pc_tk.connect_flag == -1:
             pc_tk.connect_flag = 0
-            conn.close_socket()
+            if conn is not None:
+                conn.close_socket()
             break
 
 
