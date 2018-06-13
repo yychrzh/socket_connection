@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/socket_connection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/socket_connection.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c_code/linux_protocol.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/c_code/linux_protocol.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c_code/linux_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/c_code/linux_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c_code/number_conversion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/c_code/number_conversion.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/gui_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/gui_control.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/py_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/py_protocol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/remote_peripheral.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/remote_peripheral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/remote_robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/remote_robot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/test_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/test_python.py" afterDir="false" />
-    </list>
+    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +19,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.44348896">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="pc_control.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="pc_control.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/py_code/pc_control.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="565">
-                  <caret line="413" column="38" lean-forward="true" selection-start-line="413" selection-start-column="38" selection-end-line="413" selection-end-column="38" />
+                <state relative-caret-position="43">
+                  <caret line="384" column="35" selection-start-line="384" selection-start-column="35" selection-end-line="384" selection-end-column="35" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                   </folding>
@@ -52,11 +40,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="rollouts.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="rollouts.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3438">
-                  <caret line="197" column="21" lean-forward="true" selection-start-line="197" selection-start-column="21" selection-end-line="197" selection-end-column="21" />
+                <state relative-caret-position="-1998">
+                  <caret line="3" column="22" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="22" />
                 </state>
               </provider>
             </entry>
@@ -225,7 +213,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/algorithm and data structure/week4_divide_and_conquer/3_improving_quicksort/sorting.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -635,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3438">
-          <caret line="197" column="21" lean-forward="true" selection-start-line="197" selection-start-column="21" selection-end-line="197" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/algorithm and data structure/week4_divide_and_conquer/3_improving_quicksort/improving_sorting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-51">
@@ -740,11 +721,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/py_code/pc_control.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="413" column="38" lean-forward="true" selection-start-line="413" selection-start-column="38" selection-end-line="413" selection-end-column="38" />
+        <state relative-caret-position="43">
+          <caret line="384" column="35" selection-start-line="384" selection-start-column="35" selection-end-line="384" selection-end-column="35" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../parallel_rl/code/rollouts/rollouts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1998">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="22" />
         </state>
       </provider>
     </entry>
