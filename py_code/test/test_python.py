@@ -3,7 +3,7 @@ import time
 import random
 # from py_tcpsocket import Tcpsocket
 # from number_conversion import *
-from py_protocol import Data_transfer
+from data_transfer.py_protocol import Data_transfer
 
 # send data flag: 0~127
 CONNECTION_FLAG          = 1

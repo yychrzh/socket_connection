@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
 import time
-from py_protocol import Data_transfer
-from remote_robot import Hexa, HexaBody, HexaHead, HexaLeg
+from data_transfer.py_protocol import Data_transfer
+from hexapod.remote_robot import Hexa, HexaBody, HexaHead, HexaLeg
 
 # send data flag: 0~127
 CONNECTION_FLAG          = 1

@@ -1,5 +1,5 @@
 #-*-coding:utf-8-*-
-from remote_robot import func_execute
+from hexapod.remote_robot import func_execute
 
 # data type: float, double
 DATA_FLOAT32             = 32

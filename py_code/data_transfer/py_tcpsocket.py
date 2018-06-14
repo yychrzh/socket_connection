@@ -65,10 +65,13 @@ class Tcpsocket(object):
     def recv_bytes(self, recv_lens=0):
         if recv_lens == 0:
             recv_b = self.conn.recv(self.BUFFSIZE)
+            # print("conn.recv: ", recv_b)
         else:
             recv_b = self.conn.recv(recv_lens)
         if recv_b == b'':
             print("the connection might have broken !")
+            # recv_b = self.conn.recv(self.BUFFSIZE)
+            # print(recv_b)
         return recv_b
 
     def close_socket(self):

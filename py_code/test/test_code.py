@@ -78,7 +78,7 @@ class C(A, B):
 
 
 def test_byte_char():
-    from number_conversion import Number_conver
+    from data_transfer.number_conversion import Number_conver
     n_c = Number_conver(False)
     o = [0, 64, 128, 192, 255]
     a = bytes(o)

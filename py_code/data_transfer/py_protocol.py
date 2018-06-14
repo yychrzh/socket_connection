@@ -1,5 +1,5 @@
-from number_conversion import Number_conver
-from py_tcpsocket import Tcpsocket
+from data_transfer.number_conversion import Number_conver
+from data_transfer.py_tcpsocket import Tcpsocket
 
 
 # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;4: data_length low;5~: byte data
@@ -266,3 +266,4 @@ class Data_transfer(Number_conver, Tcpsocket):
         elif self.conn_type == 'client':
             print("send connection flag...")
             self.send_flag(CONNECTION_FLAG)
+            print("handshake success !")

@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
-from auxiliary import *
-from py_protocol import *
-from HexaInfo import *
+from auxiliary.auxiliary import *
+from hexapod.HexaInfo import *
 import threading as th
-import time
+from data_node import *
+# import time
 
 
 # overtime in command function may cause error !
@@ -445,6 +445,13 @@ def remote_conn(pc_tk):
             break
 
 
+def remote_pos():
+    camera = Camera()
+    # lock = th.Lock()
+    print("start camera node:")
+    robot_request("camera", camera, 'client', 5096, 2048, '192.168.123.111', False)
+
+
 # creat a gui and a socket connection threading:
 def th_test():
     pc_gui = RemoteGui(title="Hexapod_Robot")  # , size="640x640")
@@ -454,9 +461,14 @@ def th_test():
     pc_gui.function_description_list = function_description_list
     pc_gui.create_Widgets()  # create frame
     t = th.Thread(target=remote_conn, args=(pc_gui, ), daemon=True)
+    p = th.Thread(target=remote_pos, daemon=True)
+    # start remote gui:
     t.start()
+    # start camera node:
+    p.start()
     pc_gui.mainloop()
     t.join()
+    p.join()
 
 
 if __name__ == '__main__':

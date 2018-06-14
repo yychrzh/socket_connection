@@ -6,15 +6,7 @@ GaitTripod   = 3   # 3+3 gait, 3 legs stay on the ground and 3 legs raise at the
 GaitAmble    = 4   # 4+2 gait, 4 legs stay on the ground and 2 legs raise at the same time, different from GaitRipple.
 
 
-"""["l0_degree0", "l0_degree1", "l0_degree2",
-    "l1_degree0", "l1_degree1", "l1_degree2",
-    "l2_degree0", "l2_degree1", "l2_degree2",
-    "l3_degree0", "l3_degree1", "l3_degree2",
-    "l4_degree0", "l4_degree1", "l4_degree2",
-    "l5_degree0", "l5_degree1", "l5_degree2"]"""
-
-
-module_list = ["Hexa", "HexaBody", "HexaHead", "HexaLeg", "Acce", "Distance", "Infrared"]
+module_list = ["Hexa", "HexaBody", "HexaHead", "HexaLeg", "Acce", "Distance", "Infrared", "SensorWalk", "AutoRun"]
 
 
 function_list = {
@@ -30,6 +22,8 @@ function_list = {
     "Acce": ["Available", "Start", "Close", "Value"],
     "Distance": ["Available", "Start", "Close", "Value"],
     "Infrared": ["Available", "Start", "Close", "LightOn", "LightOff", "SendInfraredSequence"]
+    "SensorWalk": ["Init", "Start", "Stop", "Close"],
+    "AutoRun": ["Init", "Start", "Stop", "Close"]
 }
 
 
@@ -99,7 +93,9 @@ function_in_out_list = {
 
     "Infrared": {"Available": [0, ["state"]], "Start": [0, 0], "Close": [0, 0],
                  "LightOn": [0, 0], "LightOff": [0, 0],
-                 "SendInfraredSequence": [["sequence"], 0]}
+                 "SendInfraredSequence": [["sequence"], 0]},
+    "SensorWalk": {"Init": [0, 0], "Start": [["walk_speed", "gaitType"], 0], "Stop": [0, 0], "Close": [0, 0]},
+    "AutoRun": {"Init": [0, 0], "Start": [["walk_speed", "gaitType"], 0], "Stop": [0, 0], "Close": [0, 0]}
 }
 
 
@@ -214,6 +210,8 @@ function_description_list = {
                  "\nExample: Send a sequence to the infrared device.\ninfrared.Start()\nsequence := " +
                  "[]int{2416, 582, 1204, 585, 609, 580, 1752, 33, 608, 577, 1574}\ninfrared."
                  "SendInfraredSequence(sequence)\ninfrared.Close()"}
+    "SensorWalk": {"Init": [0, 0], "Start": [["walk_speed", "gaitType"], 0], "Stop": [0, 0], "Close": [0, 0]},
+    "AutoRun": {"Init": [0, 0], "Start": [["walk_speed", "gaitType"], 0], "Stop": [0, 0], "Close": [0, 0]}
 }
 
 

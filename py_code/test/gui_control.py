@@ -401,29 +401,6 @@ class Gui(tk.Tk):
         self.destroy()  # destroy all widgets
 
 
-import time
-from py_protocol import Data_transfer
-from remote_robot import Hexa, HexaBody, HexaHead, HexaLeg
-
-"""
-class Gui_control(Application):
-    def __init__(self, hexa, hexabody, hexahead, hexaleg):
-        Application.__init__(self)
-        self.hexa = hexa
-        self.hexabody = hexabody
-        self.hexahead = hexahead
-        self.hexaleg = hexaleg
-        self.wm_title("Gui_control")
-
-    def create_Widgets(self):
-        footframe = self
-
-        # put return button
-        self.Button(master=footframe, name="return",
-                    command=self._quit)
-"""
-
-
 robot_ip = '192.168.123.111'  # '10.20.4.113'
 hexa_port_num = 4096
 
