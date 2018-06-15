@@ -21,7 +21,7 @@ function_list = {
                 "RelaxLegs", "StopLeg", "StopLegs"],
     "Acce": ["Available", "Start", "Close", "Value"],
     "Distance": ["Available", "Start", "Close", "Value"],
-    "Infrared": ["Available", "Start", "Close", "LightOn", "LightOff", "SendInfraredSequence"]
+    "Infrared": ["Available", "Start", "Close", "LightOn", "LightOff", "SendInfraredSequence"],
     "SensorWalk": ["Init", "Start", "Stop", "Close"],
     "AutoRun": ["Init", "Start", "Stop", "Close"]
 }
@@ -209,9 +209,15 @@ function_description_list = {
                  "slice has to be an odd number and start with, as well as end with a pulse duration." +
                  "\nExample: Send a sequence to the infrared device.\ninfrared.Start()\nsequence := " +
                  "[]int{2416, 582, 1204, 585, 609, 580, 1752, 33, 608, 577, 1574}\ninfrared."
-                 "SendInfraredSequence(sequence)\ninfrared.Close()"}
-    "SensorWalk": {"Init": [0, 0], "Start": [["walk_speed", "gaitType"], 0], "Stop": [0, 0], "Close": [0, 0]},
-    "AutoRun": {"Init": [0, 0], "Start": [["walk_speed", "gaitType"], 0], "Stop": [0, 0], "Close": [0, 0]}
+                 "SendInfraredSequence(sequence)\ninfrared.Close()"},
+    "SensorWalk": {"Init": "Init initialize hexabody and distance module",
+                   "Start": "Start let robot walking with giving walk_speed(0.0~1.0) and giving gaitType(0~4)",
+                   "Stop": "Stop stops walking",
+                   "Close": "Close closes walk and module"},
+    "AutoRun": {"Init": "Init initialize hexabody and distance module",
+                "Start": "Start let robot walking with giving walk_speed(0.0~1.0) and giving gaitType(0~4)",
+                "Stop": "Stop stops walking",
+                "Close": "Close closes walk and module"},
 }
 
 
