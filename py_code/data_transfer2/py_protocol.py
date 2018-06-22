@@ -1,6 +1,5 @@
-# use python3
-from data_transfer.number_conversion import Number_conver
-from data_transfer.py_tcpsocket import Tcpsocket
+from number_conversion import Number_conver
+from py_tcpsocket import Tcpsocket
 
 
 # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;4: data_length low;5~: byte data
@@ -109,47 +108,6 @@ class Data_transfer(Number_conver, Tcpsocket):
             send_bys.append(data_bys[i])
         return send_bys
 
-    """
-    # trans control instructions to the format of send byte
-    # data format: 0: send_flag(control flag); 1: func_name length; 
-    # 2: parameters nums; 3: data length
-    # func_name, [param data type, param_data]...
-    # data_lens: len(func_name) + parameters nums + parameters bytes
-    def instruc2send_byte1(self, func_name, params_list):
-        func_name_lens = len(func_name)
-        param_lens = len(params_list)
-        int_func_name = [ord(func_name[i]) for i in range(func_name_lens)]
-        self.debug_print("func_name", int_func_name, func_name_lens)
-        data_lens = func_name_lens + param_lens
-        for i in range(param_lens):
-            data_lens += int(params_list[i][0] / 8)
-        send_bys = []
-
-        # 0. add send_flag:
-        send_bys.append(CONTROL_FLAG)
-        # 1. add func_name lengths:
-        send_bys.append(func_name_lens)
-        # 2. add parameters nums:
-        send_bys.append(param_lens)
-        # 3. add data_lens:
-        send_bys.append(data_lens)
-        # add func_name:
-        for i in range(func_name_lens):
-            send_bys.append(int_func_name[i])
-
-        # add params_list:
-        for i in range(param_lens):
-            data_type = params_list[i][0]  # float or double
-            parameters = params_list[i][1]
-            # add parameter data type:
-            send_bys.append(params_list[i][0])
-            # add parameter data:
-            param_bys = self.float2byte(parameters, data_type)
-            for i in range(len(param_bys)):
-                send_bys.append(param_bys[i])
-        return send_bys
-    """
-
     # trans control instructions to the format of send byte
     # data format: 0: send_flag(control flag); 1: module_name length; 2: func_name length;
     # 3: parameters nums; 4: data length
@@ -200,44 +158,54 @@ class Data_transfer(Number_conver, Tcpsocket):
 
     # trans received byte to float data list
     def recv_byte2float(self, recv_bys):
-        data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
-        parity_flag = int(recv_bys[PARITY_POSITION])
-        data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
-        data_bys = recv_bys[DATA_POSITION:(DATA_POSITION + data_length * int(data_type / 8))]
+        data_type = ord(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
+        parity_flag = ord(recv_bys[PARITY_POSITION])
+        data_length = ord(recv_bys[DATA_LEN_POSITION]) * 256 + ord(recv_bys[DATA_LEN_POSITION + 1])
+        data_list = recv_bys[DATA_POSITION:(DATA_POSITION + data_length * int(data_type / 8))]
+        data_bys = [ord(v) for v in data_list]
         if parity_flag != self.parity_check(data_bys):
             print("parity check error !")
         float_array = self.bys2float_array(data_bys, data_type)
         return float_array, data_type
 
     def send_flag(self, flag):
-        send_bys = bytes([flag])
+        # send_bys = bytes([flag])
+        send_bys = chr(flag)
         self.debug_print("send_flag", send_bys, len(send_bys))
         self.send_bytes(send_bys)
 
     def send_data(self, float_array, bit=32, send_type='data'):  # send_type: 'data' or 'control'
-        send_bys = bytes(self.float2send_byte(float_array, bit, send_type))
+        send_list = self.float2send_byte(float_array, bit, send_type)
+        send_bys = ''
+        for i in range(len(send_list)):
+            send_bys += chr(send_list[i])
+        # print("send bys: ", send_bys)
         self.debug_print("send_bys", send_bys, len(send_bys))
         self.send_bytes(send_bys)
 
     # func_name: strings, params_list: [[data_type, data]... ]
     def send_control_instruction(self, module_name, func_name, params_list):
-        send_bys = bytes(self.instruc2send_byte(module_name, func_name, params_list))
+        send_list = self.instruc2send_byte(module_name, func_name, params_list)
+        send_bys = ''
+        for i in range(len(send_list)):
+            send_bys += chr(send_list[i])
         self.debug_print("send_bys", send_bys, len(send_bys))
         self.send_bytes(send_bys)
 
     def recv_data(self, recv_lens=0):
         float_array = []
         recv_char = self.recv_bytes(recv_lens)
+        # print(type(recv_char), recv_char[0], len(recv_char), type(ord(recv_char[0])))
         recv_bys = []
         for i in range(len(recv_char)):
             recv_bys.append(recv_char[i])
         self.debug_print("recv_bys", recv_bys, len(recv_bys))
-        # print("recv_bys: ", recv_bys)
+        # print(recv_bys)
 
-        recv_flag = int(recv_bys[TRANS_FLAG_POSITION])
+        recv_flag = ord(recv_bys[TRANS_FLAG_POSITION])
         if DATA_FLAG == recv_flag or CONTROL_FLAG == recv_flag:
-            data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
-            data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
+            data_type = ord(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
+            data_length = ord(recv_bys[DATA_LEN_POSITION]) * 256 + ord(recv_bys[DATA_LEN_POSITION + 1])
             all_lens = 5 + data_length * int(data_type / 8)
             received_lens = len(recv_bys)
             rest_lens = all_lens - received_lens
@@ -249,6 +217,22 @@ class Data_transfer(Number_conver, Tcpsocket):
                     recv_bys.append(temp_bys[i])
                 rest_lens -= len(temp_bys)
             float_array, _ = self.recv_byte2float(recv_bys)
+
+        # recv_flag = int(recv_bys[TRANS_FLAG_POSITION])
+        # if DATA_FLAG == recv_flag or CONTROL_FLAG == recv_flag:
+        #     data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
+        #     data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
+        #     all_lens = 5 + data_length * int(data_type / 8)
+        #     received_lens = len(recv_bys)
+        #     rest_lens = all_lens - received_lens
+        #
+        #     while rest_lens:
+        #         recv_char = self.recv_bytes(rest_lens)
+        #         temp_bys = self.recv_char2byte(recv_char)
+        #         for i in range(len(temp_bys)):
+        #             recv_bys.append(temp_bys[i])
+        #         rest_lens -= len(temp_bys)
+        #     float_array, _ = self.recv_byte2float(recv_bys)
         return recv_flag, float_array
 
     def terminate(self):
