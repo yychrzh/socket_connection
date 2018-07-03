@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/data_transfer/py_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/data_transfer/py_protocol.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py_code/test/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/test/test_python.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,11 +53,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_node.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/py_code/data_transfer2/data_node.py">
+      <file leaf-file-name="client.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/old_version/client.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+            <state relative-caret-position="355">
+              <caret line="53" selection-start-line="53" selection-end-line="53" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/old_version/client.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1201">
+              <caret line="361" column="9" lean-forward="true" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -69,6 +78,18 @@
               <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_python.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/py_code/test_python.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="151" column="103" selection-start-line="151" selection-start-column="103" selection-end-line="151" selection-end-column="103" />
+              <folding>
+                <element signature="e#20#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,12 +148,10 @@
         <option value="$PROJECT_DIR$/py_code/test_code.py" />
         <option value="$USER_HOME$/Desktop/algorithm and data structure/week4_divide_and_conquer/3_improving_quicksort/improving_sorting.py" />
         <option value="$PROJECT_DIR$/py_code/auxiliary.py" />
-        <option value="$PROJECT_DIR$/py_code/test_python.py" />
         <option value="$PROJECT_DIR$/py_code/HexaInfo.py" />
         <option value="$PROJECT_DIR$/py_code/test/gui_control.py" />
         <option value="$PROJECT_DIR$/py_code/test/test_code.py" />
         <option value="$PROJECT_DIR$/py_code/test/mind_control.py" />
-        <option value="$PROJECT_DIR$/py_code/test/test_python.py" />
         <option value="$PROJECT_DIR$/py_code/hexapod/remote_peripheral.py" />
         <option value="$PROJECT_DIR$/data_node.py" />
         <option value="$PROJECT_DIR$/py_code/data_transfer/py_tcpsocket.py" />
@@ -149,6 +168,8 @@
         <option value="$PROJECT_DIR$/py_code/py3.py" />
         <option value="$PROJECT_DIR$/py_code/data_transfer2/py2.py" />
         <option value="$PROJECT_DIR$/py_code/data_transfer2/data_node.py" />
+        <option value="$PROJECT_DIR$/py_code/test/test_python.py" />
+        <option value="$PROJECT_DIR$/py_code/test_python.py" />
       </list>
     </option>
   </component>
@@ -161,9 +182,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-79" />
-    <option name="y" value="116" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1097" />
+    <option name="y" value="36" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -186,12 +207,6 @@
               <item name="socket_connection" type="b2602c69:ProjectViewProjectNode" />
               <item name="socket_connection" type="462c0819:PsiDirectoryNode" />
               <item name="py_code" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="socket_connection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="socket_connection" type="462c0819:PsiDirectoryNode" />
-              <item name="py_code" type="462c0819:PsiDirectoryNode" />
-              <item name="data_transfer2" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -218,6 +233,7 @@
       <recent name="F:\GitHub\socket_connection\py_code\data_transfer2" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\GitHub\socket_connection\py_code" />
       <recent name="F:\GitHub\socket_connection\py_code\data_transfer2" />
     </key>
   </component>
@@ -436,19 +452,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="6" sideWeight="0.50054526" side_tool="true" visible="true" weight="0.32995737" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="6" sideWeight="0.50054526" side_tool="true" weight="0.44340974" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3293348" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32497275" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3283582" />
       <window_info anchor="right" id="Remote Host" order="3" sideWeight="0.49945474" weight="0.32995737" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13432837" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18051577" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
@@ -503,12 +519,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/remote_peripheral.py" />
-    <entry file="file://$PROJECT_DIR$/tk_test.py" />
     <entry file="file://$PROJECT_DIR$/remote_robot.py" />
     <entry file="file://C:/Anaconda2/envs/py3/Lib/tkinter/constants.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -578,7 +592,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/py_code/HexaInfo.py" />
-    <entry file="file://$PROJECT_DIR$/py_code/test_python.py" />
     <entry file="file://$PROJECT_DIR$/py_code/py_tcpsocket.py" />
     <entry file="file://$PROJECT_DIR$/py_code/remote_robot.py" />
     <entry file="file://$PROJECT_DIR$/../parallel_rl/code/model/ppo.py">
@@ -602,9 +615,6 @@
           <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/hexapod/remote_robot.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/py_code/data_transfer/number_conversion.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -633,22 +643,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/hexapod/hexabody.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/py_code/data_transfer/py_tcpsocket.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/hexapod/HexaInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3441">
-          <caret line="205" column="61" lean-forward="true" selection-start-line="205" selection-start-column="61" selection-end-line="205" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -702,16 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/py3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/py_code/data_transfer2/number_conversion.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3330">
@@ -729,13 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_code/test/test_python.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/py_code/data_transfer2/py2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -748,8 +729,71 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/py_code/data_transfer2/data_node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        <state relative-caret-position="-54">
+          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/hexapod/hexabody.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-486" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/hexapod/HexaInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="205" column="61" lean-forward="true" selection-start-line="205" selection-start-column="61" selection-end-line="205" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/hexapod/remote_robot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-573">
+          <caret line="255" column="29" selection-start-line="255" selection-start-column="8" selection-end-line="255" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old_version/client.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="53" selection-start-line="53" selection-end-line="53" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old_version/client.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1201">
+          <caret line="361" column="9" lean-forward="true" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/test/test_python.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2754">
+          <caret line="153" column="10" selection-start-line="153" selection-start-column="10" selection-end-line="153" selection-end-column="10" />
+          <folding>
+            <element signature="e#20#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/py3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_code/test_python.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="151" column="103" selection-start-line="151" selection-start-column="103" selection-end-line="151" selection-end-column="103" />
+          <folding>
+            <element signature="e#20#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

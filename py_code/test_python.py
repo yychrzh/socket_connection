@@ -149,9 +149,9 @@ if __name__ == "__main__":
     socket_type = recv_str
     if socket_type == 'server':
         print("create socket server, waiting for client:")
-        conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, debug_print=True)
+        conn = Data_transfer(conn_type=socket_type, port_num=port_num, buffsize=2048, debug_print=False)
         conn.handshake()
-        # float_test(conn)
+        float_test(conn)
     elif socket_type == 'client':
         print("create socket client, please input server ip(default: '127.0.0.1'):")
         recv_str = read_one_line_from_screen()
