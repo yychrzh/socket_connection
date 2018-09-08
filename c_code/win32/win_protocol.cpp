@@ -56,6 +56,25 @@ void Data_transfer::data_array_copy(double *output, double *input, int lens)
 	}
 }
 
+/*************************************************handshake***************************************************/
+void Data_transfer::handshake()
+{
+	if (0 == strcmp(socket_type, "server")){
+		unsigned char data_type = 0;
+		int data_lens = 0;
+		unsigned char recv_flag = 0;
+
+		recv_data(&recv_flag, &data_type, &data_lens);
+		if (CONNECTION_FLAG == recv_flag) {
+			printf("handshake success !\n");
+		}
+	}
+	else if (0 == strcmp(socket_type, "client")) {
+		send_flag((unsigned char)CONNECTION_FLAG);
+		printf("handshake success !\n");
+	}
+}
+
 /*************************************************data_trans**************************************************/
 //parity check of the data
 unsigned char Data_transfer::parity_check(unsigned char *data, int lens)
@@ -129,6 +148,36 @@ void Data_transfer::double2send_byte(const double *data, int data_lens)
 
 	// add data:
 	data_array_copy(&send_byte[DATA_POSITION], double_bytes, FLOAT64_BYTE * data_lens);
+	return;
+}
+
+// from a unsigned char array to a send byte array []
+void Data_transfer::uchar2send_byte(const unsigned char *data, int data_lens)
+{
+	// unsigned char double_bytes[FLOAT64_BYTE * data_lens]; // bytes
+	unsigned char uchar_bytes[CHAR_BUFFSIZE]; // bytes
+
+	memset(uchar_bytes, '\0', FLOAT64_BYTE * data_lens);
+
+	for (int i = 0; i < data_lens; i++) {
+		uchar_bytes[i] = data[i];
+	}
+
+	Number_conver::debug_print("uchar_bytes", uchar_bytes, data_lens);
+
+	// add send flag:
+	send_byte[TRANS_FLAG_POSITION] = (unsigned char)(DATA_FLAG);   // data
+	// add data type:
+	send_byte[DATA_TYPE_POSITION] = (unsigned char)(DATA_UCHAR);
+	// add parity flag:
+	send_byte[PARITY_POSITION] = (unsigned char)(parity_check(uchar_bytes, FLOAT64_BYTE * data_lens));
+	// add data length's high byte:
+	send_byte[DATA_LEN_POSITION] = (unsigned char)(data_lens / 256);
+	// add data length's low byte:
+	send_byte[DATA_LEN_POSITION + 1] = (unsigned char)(data_lens % 256);
+
+	// add data:
+	data_array_copy(&send_byte[DATA_POSITION], uchar_bytes, data_lens);
 	return;
 }
 
@@ -330,6 +379,14 @@ void Data_transfer::send_data(double *data, int data_lens)
 	double2send_byte(data, data_lens);
 	Number_conver::debug_print("send_byte", send_byte, data_lens * FLOAT64_BYTE + 5);
 	send_strings(send_byte, data_lens * FLOAT64_BYTE + 5);
+}
+
+// send unsigend char data:
+void Data_transfer::send_data(unsigned char *data, int data_lens)
+{
+	uchar2send_byte(data, data_lens);
+	Number_conver::debug_print("send_byte", send_byte, data_lens + 5);
+	send_strings(send_byte, data_lens + 5);
 }
 
 // send flag:
