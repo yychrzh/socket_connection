@@ -50,6 +50,8 @@
 #define FLOAT_BUFFSIZE              510     // 510      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT32_BYTE)
 #define DOUBLE_BUFFSIZE             255     // 255      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT64_BYTE)
 
+#define MAX_BUFFSIZE              255 * 257 + 5
+
 
 typedef struct Function_name{
 	int module_name_lens;
@@ -79,9 +81,10 @@ public:
 	// handshake:
 	void handshake();
 
-	float recv_float_data[FLOAT_BUFFSIZE];   // max float data length;
-	double recv_double_data[DOUBLE_BUFFSIZE]; // max double data length;
-
+	float recv_float_data[FLOAT_BUFFSIZE];      // max float data length;
+	double recv_double_data[DOUBLE_BUFFSIZE];   // max double data length;
+	unsigned char recv_uchar_data[MAX_BUFFSIZE];  
+  
 	/**********************************send recv byte**************************************/
 	// save parmeters
 	Func_name func_name;
@@ -119,8 +122,10 @@ public:
 
 private:
 
-	unsigned char send_byte[CHAR_BUFFSIZE];
-	unsigned char recv_byte[CHAR_BUFFSIZE];
+	// unsigned char send_byte[CHAR_BUFFSIZE];
+	// unsigned char recv_byte[CHAR_BUFFSIZE];
+	unsigned char send_byte[MAX_BUFFSIZE];
+	unsigned char recv_byte[MAX_BUFFSIZE];
 
 	//data array copy: from byte array to char array with data length = lens
 	void data_array_copy(char *output, unsigned char *input, int lens);
@@ -130,6 +135,7 @@ private:
 	/**********************************data trans*************************************/
 	// data check parity: 0: even; 1: odd
 	unsigned char parity_check(unsigned char *data, int lens);
+	unsigned char parity_check(const unsigned char *data, int lens);
 
 	// from a float array to a send byte array []
 	void float2send_byte(const float *data, int data_lens);
@@ -142,6 +148,8 @@ private:
 	void recv_byte2float(int data_lens);
 	// trans recv byte array [] to double array: return data length
 	void recv_byte2double(int data_lens);
+	// trans recv byte array [] to unsigned char array: return data length
+	void recv_byte2uchar(int data_lens);
 };
 
 #endif

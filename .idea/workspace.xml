@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_code/test/test_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_code/test/test_python.py" afterDir="false" />
-    </list>
+    <list default="true" id="c41d385e-16fe-40fc-9f7c-06bb1cf8499a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/py_code/data_node.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1278">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -45,28 +42,10 @@
         <entry file="file://$PROJECT_DIR$/py_code/data_transfer2/py2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
-              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/old_version/client.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="53" selection-start-line="53" selection-end-line="53" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/old_version/client.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1201">
-              <caret line="361" column="9" lean-forward="true" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -86,8 +65,8 @@
       <file leaf-file-name="test_python.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/py_code/test_python.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="151" column="103" selection-start-line="151" selection-start-column="103" selection-end-line="151" selection-end-column="103" />
+            <state relative-caret-position="1623">
+              <caret line="135" selection-start-line="135" selection-end-line="135" selection-end-column="26" />
               <folding>
                 <element signature="e#20#31#0" expanded="true" />
               </folding>
@@ -183,10 +162,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1097" />
-    <option name="y" value="36" />
+    <option name="x" value="-39" />
+    <option name="y" value="73" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="955" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -223,7 +202,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../algorithm_and_data_structure" />
+    <property name="last_opened_file_path" value="F:/webots_project/hexapod03/controllers/py_controller/code" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -452,7 +431,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -464,7 +443,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32497275" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3283582" />
       <window_info anchor="right" id="Remote Host" order="3" sideWeight="0.49945474" weight="0.32995737" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18051577" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13432837" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
@@ -679,7 +658,7 @@
     <entry file="file://$PROJECT_DIR$/py_code/data_node.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1278">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
         </state>
       </provider>
     </entry>
@@ -720,7 +699,7 @@
     <entry file="file://$PROJECT_DIR$/py_code/data_transfer2/py2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -763,7 +742,7 @@
     <entry file="file://$PROJECT_DIR$/old_version/client.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1201">
-          <caret line="361" column="9" lean-forward="true" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
+          <caret line="361" column="9" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -789,8 +768,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/py_code/test_python.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="151" column="103" selection-start-line="151" selection-start-column="103" selection-end-line="151" selection-end-column="103" />
+        <state relative-caret-position="1623">
+          <caret line="135" selection-start-line="135" selection-end-line="135" selection-end-column="26" />
           <folding>
             <element signature="e#20#31#0" expanded="true" />
           </folding>

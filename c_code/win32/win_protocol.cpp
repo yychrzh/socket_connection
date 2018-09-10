@@ -93,6 +93,23 @@ unsigned char Data_transfer::parity_check(unsigned char *data, int lens)
 	return EVEN_FLAG;        //even
 }
 
+//parity check of the data
+unsigned char Data_transfer::parity_check(const unsigned char *data, int lens)
+{
+	int parity_num = 0;
+	for (int i = 0; i < lens; i++)
+	{
+		parity_num += (data[i] % 2);
+	}
+
+	if (parity_num % 2)
+	{
+		return ODD_FLAG;     //odd
+	}
+
+	return EVEN_FLAG;        //even
+}
+
 // from a float array to a send byte array []
 void Data_transfer::float2send_byte(const float *data, int data_lens)
 {
@@ -155,33 +172,33 @@ void Data_transfer::double2send_byte(const double *data, int data_lens)
 void Data_transfer::uchar2send_byte(const unsigned char *data, int data_lens)
 {
 	// unsigned char double_bytes[FLOAT64_BYTE * data_lens]; // bytes
-	unsigned char uchar_bytes[CHAR_BUFFSIZE]; // bytes
+	// unsigned char uchar_bytes[CHAR_BUFFSIZE]; // bytes
 
-	memset(uchar_bytes, '\0', FLOAT64_BYTE * data_lens);
+	// memset(uchar_bytes, '\0', FLOAT64_BYTE * data_lens);
 
-	for (int i = 0; i < data_lens; i++) {
-		uchar_bytes[i] = data[i];
-	}
+	// for (int i = 0; i < data_lens; i++) {
+    // 		uchar_bytes[i] = data[i];
+	// }
 
-	Number_conver::debug_print("uchar_bytes", uchar_bytes, data_lens);
+	Number_conver::debug_print("uchar_bytes", data, data_lens);
 
 	// add send flag:
 	send_byte[TRANS_FLAG_POSITION] = (unsigned char)(DATA_FLAG);   // data
 	// add data type:
 	send_byte[DATA_TYPE_POSITION] = (unsigned char)(DATA_UCHAR);
 	// add parity flag:
-	send_byte[PARITY_POSITION] = (unsigned char)(parity_check(uchar_bytes, FLOAT64_BYTE * data_lens));
+	send_byte[PARITY_POSITION] = (unsigned char)(parity_check(data, data_lens));
 	// add data length's high byte:
 	send_byte[DATA_LEN_POSITION] = (unsigned char)(data_lens / 256);
 	// add data length's low byte:
 	send_byte[DATA_LEN_POSITION + 1] = (unsigned char)(data_lens % 256);
 
 	// add data:
-	data_array_copy(&send_byte[DATA_POSITION], uchar_bytes, data_lens);
+	data_array_copy(&send_byte[DATA_POSITION], (unsigned char *)(&data[0]), data_lens);
 	return;
 }
 
-// trans recv byte array [] to float array: return data length
+// trans recv byte array [] to float array: 
 void Data_transfer::recv_byte2float(int data_lens)
 {
 	// int data_lens = 0;
@@ -209,7 +226,7 @@ void Data_transfer::recv_byte2float(int data_lens)
 	return;
 }
 
-// trans recv byte array [] to double array: return data length
+// trans recv byte array [] to double array: 
 void Data_transfer::recv_byte2double(int data_lens)
 {
 	// int data_lens = 0;
@@ -230,6 +247,33 @@ void Data_transfer::recv_byte2double(int data_lens)
 	{
 		// save data to recv_float_data[]
 		bys2double_array(recv_double_data, double_bytes, data_lens);
+	}
+	else{
+		printf("parity check error !\n");
+	}
+	return;
+}
+
+// trans recv byte array [] to unsigned char array: 
+void Data_transfer::recv_byte2uchar(int data_lens)
+{
+	// int data_lens = 0;
+	unsigned char parity_flag = 0;
+
+	// get data_lens of float data:
+	data_lens = (recv_byte[DATA_LEN_POSITION]) * 256 + recv_byte[DATA_LEN_POSITION + 1];
+
+	// get byte data:
+	// unsigned char double_bytes[FLOAT64_BYTE * data_lens]; // bytes
+	// unsigned char uchar_array[CHAR_BUFFSIZE]; // bytes
+	data_array_copy(recv_uchar_data, &recv_byte[DATA_POSITION], data_lens);
+
+	// get parity flag:
+	parity_flag = parity_check(recv_uchar_data, data_lens);
+
+	if (parity_flag == recv_byte[PARITY_POSITION])
+	{
+		;
 	}
 	else{
 		printf("parity check error !\n");
@@ -266,7 +310,7 @@ void Data_transfer::recv_data_flag(unsigned char *data_type, int *data_lens, int
 	// get data_type and data_length:
 	*data_type = recv_byte[DATA_TYPE_POSITION];
 	*data_lens = recv_byte[DATA_LEN_POSITION] * 256 + recv_byte[DATA_LEN_POSITION + 1];
-	all_lens = 5 + (*data_lens) * (*data_type / 8);
+	all_lens = 5 + (*data_lens) * int((*data_type / 8));
 
 	recv_rest_data(all_lens, received_lens);
 
@@ -275,6 +319,9 @@ void Data_transfer::recv_data_flag(unsigned char *data_type, int *data_lens, int
 	}
 	else if (DATA_FLOAT64 == (*data_type)){
 		recv_byte2double(*data_lens);
+	}
+	else if (DATA_UCHAR == (*data_type)) {
+		recv_byte2uchar(*data_lens);
 	}
 }
 
