@@ -23,7 +23,7 @@ Tcpsocket::Tcpsocket(const char *s_type, int port_n, int buff_s, const char *s_i
 Tcpsocket::Tcpsocket(const char *s_type, int port_n, int buff_s, bool debug)
 {
 	// copy parameters
-	strcpy(socket_type, s_type);
+	strcpy_s(socket_type, s_type);
 	port_num = port_n;
 	buffsize = buff_s;
 	debug_print_flag = debug;
@@ -91,12 +91,12 @@ int Tcpsocket::create_conn_server()
 
 	char msg[200] = "\0";
 	char port_str[10];
-	sprintf(port_str, "%d", ntohs(addrClient.sin_port));
-	strcpy(msg, "accept from client ");
-	strcat(msg, inet_ntoa(addrClient.sin_addr));
-	strcat(msg, ":");
-	strcat(msg, port_str);
-	strcat(msg, " success !\n");
+	sprintf_s(port_str, "%d", ntohs(addrClient.sin_port));
+	strcpy_s(msg, "accept from client ");
+	strcat_s(msg, inet_ntoa(addrClient.sin_addr));
+	strcat_s(msg, ":");
+	strcat_s(msg, port_str);
+	strcat_s(msg, " success !\n");
 	debug_print(msg);
 	return conn;
 }
@@ -135,12 +135,12 @@ int Tcpsocket::create_conn_client()
 	if (err == 0){
 		char msg[200] = "\0";
 		char port_str[10];
-		sprintf(port_str, "%d", port_num);
-		strcpy(msg, "connect to server ");
-		strcat(msg, server_ip);
-		strcat(msg, ":");
-		strcat(msg, port_str);
-		strcat(msg, " success !\n");
+		sprintf_s(port_str, "%d", port_num);
+		strcpy_s(msg, "connect to server ");
+		strcat_s(msg, server_ip);
+		strcat_s(msg, ":");
+		strcat_s(msg, port_str);
+		strcat_s(msg, " success !\n");
 		debug_print(msg);
 		return sockClient;
 	}
@@ -173,14 +173,14 @@ int Tcpsocket::recv_strings(void *recv_buf, int recv_lens)
 }
 
 // send_buf: char pointer that stores the strings will be sent
-void Tcpsocket::send_strings(const void *send_buf, int send_data_lens)
+int Tcpsocket::send_strings(const void *send_buf, int send_data_lens)
 {
 	int real_send_lens = 0;
 	real_send_lens = send(conn, (const char *)send_buf, send_data_lens, 0);
 	if (real_send_lens < send_data_lens){
 		debug_print("not all data has been sent\n");
 	}
-	return;
+	return real_send_lens;
 }
 
 void Tcpsocket::close_socket()

@@ -50,7 +50,7 @@
 #define FLOAT_BUFFSIZE              510     // 510      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT32_BYTE)
 #define DOUBLE_BUFFSIZE             255     // 255      // (int)((BUFFSIZE - FLAG_LENGTH) / FLOAT64_BYTE)
 
-#define MAX_BUFFSIZE              255 * 257 + 5
+#define MAX_BUFFSIZE                520 * 520
 
 
 typedef struct Function_name{

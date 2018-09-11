@@ -25,7 +25,7 @@ public:
 	int buffsize;
 	char socket_type[10];
     // send and receive char data:
-	void send_strings(const void *send_buf, int send_data_lens);
+	int send_strings(const void *send_buf, int send_data_lens);
 	int recv_strings(void *recv_buf);
 	int recv_strings(void *recv_buf, int recv_lens);
 	void close_socket();

@@ -21,7 +21,6 @@ DATA_POSITION            = DATA_LEN_POSITION + DATA_LEN_FLAG_LENGTH    # 5
 # data type: float, double
 DATA_FLOAT32             = 32
 DATA_FLOAT64             = 64
-DATA_BOOL                = 1
 DATA_CHAR                = 8
 DATA_UCHAR               = 9
 DATA_INT                 = 32 + 1
@@ -71,6 +70,43 @@ class Data_transfer(Number_conver, Tcpsocket):
             else:
                 output_data.append(input_data[i])
         return output_data
+
+    # trans unsigned char data list to the format of send byte
+    # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;
+    # 4: data_length low;5~: byte data
+    def uchar2send_byte(self, uchar_data):
+        parity_flag = 0  # self.parity_check(uchar_data)
+        data_length = len(uchar_data)
+
+        send_bys = []
+        # add send_flag:
+        send_bys.append(DATA_FLAG)
+        # add data_type:
+        send_bys.append(DATA_UCHAR)
+        # add parity flag:
+        send_bys.append(parity_flag)
+
+        # add data length's high byte:
+        # send_bys.append(data_length // 256)
+        # add data length's low byte:
+        # send_bys.append(data_length % 256)
+        LEN_0 = data_length // (256**3)
+        RES_0 = data_length % (256**3)
+        LEN_1 = RES_0 // (256**2)
+        RES_1 = RES_0 % (256**2)
+        LEN_2 = RES_1 // 256
+        LEN_3 = RES_1 % 256
+        send_bys.append(LEN_0)
+        send_bys.append(LEN_1)
+        send_bys.append(LEN_2)
+        send_bys.append(LEN_3)
+        # print("data_lens: ", LEN_0, LEN_1, LEN_2, LEN_3)
+        # print("data_lens: ", LEN_0 * (256**3) + LEN_1 * (256**2) + LEN_2 * 256 + LEN_3)
+
+        # add data:
+        for i in range(len(uchar_data)):
+            send_bys.append(uchar_data[i])
+        return send_bys
 
     # trans float data list to the format of send byte
     # data format: 0: data_flag;1: data_type;2: parity_flag;3: data_length high;
@@ -209,14 +245,30 @@ class Data_transfer(Number_conver, Tcpsocket):
         float_array = self.bys2float_array(data_bys, data_type)
         return float_array, data_type
 
+    # trans received byte to unsigned char data list
+    def recv_byte2uchar(self, recv_bys):
+        data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
+        parity_flag = int(recv_bys[PARITY_POSITION])
+        data_length = int(recv_bys[3]) * (256 ** 3) + int(recv_bys[4]) * (256 ** 2) + int(recv_bys[5]) * 256 \
+                      + int(recv_bys[6])
+        data_bys = recv_bys[7:(7 + data_length * int(data_type / 8))]
+        # if parity_flag != self.parity_check(data_bys):
+        #    print("parity check error !")
+        return data_bys, data_type
+
     def send_flag(self, flag):
         send_bys = bytes([flag])
         self.debug_print("send_flag", send_bys, len(send_bys))
         self.send_bytes(send_bys)
 
-    def send_data(self, float_array, bit=32, send_type='data'):  # send_type: 'data' or 'control'
-        send_bys = bytes(self.float2send_byte(float_array, bit, send_type))
+    def send_data(self, data_array, data_type=DATA_FLOAT32, send_type='data'):  # send_type: 'data' or 'control'
+        send_bys = []
+        if DATA_FLOAT32 == data_type or DATA_FLOAT64 == data_type:
+            send_bys = bytes(self.float2send_byte(data_array, data_type, send_type))
+        elif DATA_UCHAR == data_type:
+            send_bys = bytes(self.uchar2send_byte(data_array))
         self.debug_print("send_bys", send_bys, len(send_bys))
+        # print("send_lens: ", len(send_bys))
         self.send_bytes(send_bys)
 
     # func_name: strings, params_list: [[data_type, data]... ]
@@ -226,30 +278,41 @@ class Data_transfer(Number_conver, Tcpsocket):
         self.send_bytes(send_bys)
 
     def recv_data(self, recv_lens=0):
-        float_array = []
         recv_char = self.recv_bytes(recv_lens)
         recv_bys = []
         for i in range(len(recv_char)):
             recv_bys.append(recv_char[i])
         self.debug_print("recv_bys", recv_bys, len(recv_bys))
-        # print("recv_bys: ", recv_bys)
 
         recv_flag = int(recv_bys[TRANS_FLAG_POSITION])
         if DATA_FLAG == recv_flag or CONTROL_FLAG == recv_flag:
-            data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64
-            data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
-            all_lens = 5 + data_length * int(data_type / 8)
+            data_type = int(recv_bys[DATA_TYPE_POSITION])  # 32 or 64 or 8
+            all_lens = 0
+            if DATA_FLOAT32 == data_type or DATA_FLOAT64 == data_type:
+                data_length = int(recv_bys[DATA_LEN_POSITION]) * 256 + int(recv_bys[DATA_LEN_POSITION + 1])
+                all_lens = 5 + data_length * int(data_type / 8)
+            elif DATA_UCHAR == data_type:
+                data_length = int(recv_bys[3]) * (256**3) + int(recv_bys[4]) * (256**2) + int(recv_bys[5]) * 256 \
+                              + int(recv_bys[6])
+                all_lens = 7 + data_length * int(data_type / 8)
             received_lens = len(recv_bys)
             rest_lens = all_lens - received_lens
 
+            # read rest data:
             while rest_lens:
                 recv_char = self.recv_bytes(rest_lens)
-                temp_bys = self.recv_char2byte(recv_char)
-                for i in range(len(temp_bys)):
-                    recv_bys.append(temp_bys[i])
-                rest_lens -= len(temp_bys)
-            float_array, _ = self.recv_byte2float(recv_bys)
-        return recv_flag, float_array
+                for i in range(len(recv_char)):
+                    recv_bys.append(recv_char[i])
+                rest_lens -= len(recv_char)
+
+            # float or double data:
+            if DATA_FLOAT32 == data_type or DATA_FLOAT64 == data_type:
+                float_array, _ = self.recv_byte2float(recv_bys)
+                return recv_flag, float_array
+            # unsigned char data:
+            elif DATA_UCHAR == data_type:
+                uchar_array, _ = self.recv_byte2uchar(recv_bys)
+                return recv_flag, uchar_array
 
     def terminate(self):
         print("send termination flag to hexa !")
