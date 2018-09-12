@@ -25,17 +25,6 @@ def float_test(conn):
     error_count = 0
     total_lens = 0
 
-    # recv connect flag:
-    """
-    print("waiting for connection flag...")
-    recv_flag, _ = conn.recv_data()
-    if CONNECTION_FLAG != recv_flag:
-        print("connect with client error !")
-        return
-    else:
-        print("connect with client success !")
-    """
-
     start_time = time.time()
     while True:
         send_array = []
@@ -131,10 +120,38 @@ def agent_test():
                   % (error_count, total_lens))
             conn.close_socket()
             break
+			
+			
+def server_test(conn):
+    while True:
+	    print("waiting for data from client...")
+	    recv_str = conn.recv_strings()
+	    print("received from client: ", recv_str)
+		print("received data lens: ", len(recv_str))
+		conn.send_strings(recv_str)
+		if recv_str[0] == 'Q':
+		    print("received quit flag, closed quit connection!")
+			conn.close_socket()
+			break
+	
 
+def client_test(conn):
+    while True:
+        print("please input one line data: ")
+        send_str = read_one_line_from_screen()
+        conn.send_strings(send_str)
+		print("send data lens: ", len(send_str))
+        print("waiting for data from server...")
+        recv_str = conn.recv_strings()
+		print("received from server: ", recv_str)
+		print("received data lens: ", len(recv_str))
+		if recv_str[0] == 'Q':
+		    print("received quit flag, closed quit connection!")
+			conn.close_socket()
+			break
+		
 
 if __name__ == "__main__":
-    # agent_test()
 
     port_num = 8088
     socket_type = 'server'

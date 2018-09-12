@@ -313,6 +313,7 @@ class Data_transfer(Number_conver, Tcpsocket):
             elif DATA_UCHAR == data_type:
                 uchar_array, _ = self.recv_byte2uchar(recv_bys)
                 return recv_flag, uchar_array
+        return recv_flag, []
 
     def terminate(self):
         print("send termination flag to hexa !")

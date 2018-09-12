@@ -162,14 +162,14 @@ int Tcpsocket::recv_strings(void *recv_buf, int recv_lens)
 }
 
 // send_buf: char pointer that stores the strings will be sent
-void Tcpsocket::send_strings(const void *send_buf, int send_data_lens)
+int Tcpsocket::send_strings(const void *send_buf, int send_data_lens)
 {
 	int real_send_lens = 0;
 	real_send_lens = send(conn, send_buf, send_data_lens, 0);
 	if (real_send_lens < send_data_lens){
 		debug_print("not all data has been sent\n");
 	}
-	return;
+	return real_send_lens;
 }
 
 void Tcpsocket::close_socket()
