@@ -289,8 +289,8 @@ void Data_transfer::recv_rest_data(int all_lens, int received_lens)
 void Data_transfer::recv_data_flag(unsigned char *data_type, int *data_lens, int received_lens)
 {
 	int all_lens = 0;
-	int recv_data_lens = 0;
-	int rest_lens = 0;
+	// int recv_data_lens = 0;
+	// int rest_lens = 0;
 
 	// get data_type and data_length:
 	*data_type = recv_byte[DATA_TYPE_POSITION];
@@ -325,8 +325,8 @@ void Data_transfer::recv_data_flag(unsigned char *data_type, int *data_lens, int
 void Data_transfer::recv_control_flag(int *data_lens, int received_lens)
 {
 	int all_lens = 0;
-	int recv_data_lens = 0;
-    int rest_lens = 0;
+	// int recv_data_lens = 0;
+    // int rest_lens = 0;
 	
 	int current_position = 0; 
 	int current_data_type = 0;

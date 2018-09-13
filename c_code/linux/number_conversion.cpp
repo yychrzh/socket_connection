@@ -827,7 +827,7 @@ void Number_conver::bin2bys(unsigned char *bys, const char *bins, int bit)
 // from float(decimal) to binary (char array): the lens of bins must be longer than bit
 void Number_conver::dec2bin(float x, char *bins, int bit)
 {
-	int accuracy_bit = 0;
+	// int accuracy_bit = 0;
 	int i = 0;
 	unsigned char current_bit = 0;
 	
@@ -872,7 +872,7 @@ void Number_conver::dec2bin(float x, char *bins, int bit)
 // from double (decimal) to binary (char array)
 void Number_conver::dec2bin(double x, char *bins, int bit)
 {
-	int accuracy_bit = 0;
+	// int accuracy_bit = 0;
 	int i = 0;
 	unsigned char current_bit = 0;
 	
